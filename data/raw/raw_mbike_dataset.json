@@ -1,0 +1,495 @@
+[
+    {
+        "number": 24,
+        "contract_name": "maribor",
+        "name": "VZAJEMNA, VARUH ZDRAVJA - BETNAVSKA C.",
+        "address": "Betnavska c. 83",
+        "position": {
+            "lat": 46.54199,
+            "lng": 15.63831
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 12,
+        "available_bikes": 8,
+        "status": "OPEN",
+        "last_update": 1711310058000
+    },
+    {
+        "number": 10,
+        "contract_name": "maribor",
+        "name": "TELEMACH - GLAVNI TRG - STARI PERON",
+        "address": "Glavni trg 20",
+        "position": {
+            "lat": 46.557328,
+            "lng": 15.646833
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 3,
+        "available_bikes": 17,
+        "status": "OPEN",
+        "last_update": 1711309982000
+    },
+    {
+        "number": 9,
+        "contract_name": "maribor",
+        "name": "NKBM - TRG LEONA \u0160TUKLJA",
+        "address": "Ulica slovenske osamosvojitve 5",
+        "position": {
+            "lat": 46.558519,
+            "lng": 15.649072
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 5,
+        "available_bikes": 15,
+        "status": "OPEN",
+        "last_update": 1711309801000
+    },
+    {
+        "number": 13,
+        "contract_name": "maribor",
+        "name": "PARTIZANSKA C. - \u017dELEZNI\u0160KA POSTAJA",
+        "address": "Partizanska cesta 46-48",
+        "position": {
+            "lat": 46.561555,
+            "lng": 15.65692
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 20,
+        "available_bikes": 0,
+        "status": "OPEN",
+        "last_update": 1711309866000
+    },
+    {
+        "number": 20,
+        "contract_name": "maribor",
+        "name": "EUROPARK - POBRE\u0160KA C.",
+        "address": "Pobre\u0161ka cesta 18",
+        "position": {
+            "lat": 46.554703,
+            "lng": 15.652826
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 21,
+        "available_bike_stands": 1,
+        "available_bikes": 20,
+        "status": "OPEN",
+        "last_update": 1711309938000
+    },
+    {
+        "number": 4,
+        "contract_name": "maribor",
+        "name": "STROSSMAYERJEVA UL. - TR\u017dNICA",
+        "address": "Strossmayerjeva ulica 3",
+        "position": {
+            "lat": 46.558498,
+            "lng": 15.64146
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 5,
+        "available_bikes": 15,
+        "status": "OPEN",
+        "last_update": 1711309824000
+    },
+    {
+        "number": 1,
+        "contract_name": "maribor",
+        "name": "GOSPOSVETSKA C. - TURNERJEVA UL.",
+        "address": "Gosposvetska cesta 69",
+        "position": {
+            "lat": 46.562695,
+            "lng": 15.62935
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 22,
+        "available_bike_stands": 22,
+        "available_bikes": 0,
+        "status": "OPEN",
+        "last_update": 1711310219000
+    },
+    {
+        "number": 16,
+        "contract_name": "maribor",
+        "name": "KORO\u0160KA C. - KORO\u0160KI VETER",
+        "address": "Koro\u0161ka cesta 74",
+        "position": {
+            "lat": 46.559319,
+            "lng": 15.63498
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 1,
+        "available_bikes": 19,
+        "status": "OPEN",
+        "last_update": 1711309890000
+    },
+    {
+        "number": 3,
+        "contract_name": "maribor",
+        "name": "GOSPOSVETSKA C. - III. GIMNAZIJA",
+        "address": "Gosposvetska cesta 4",
+        "position": {
+            "lat": 46.560761,
+            "lng": 15.64053
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 20,
+        "available_bikes": 0,
+        "status": "OPEN",
+        "last_update": 1711309834000
+    },
+    {
+        "number": 21,
+        "contract_name": "maribor",
+        "name": "GORKEGA UL. - O\u0160 FRANCETA PRE\u0160ERNA",
+        "address": "Gorkega ulica 32",
+        "position": {
+            "lat": 46.550683,
+            "lng": 15.639333
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 18,
+        "available_bikes": 2,
+        "status": "OPEN",
+        "last_update": 1711309821000
+    },
+    {
+        "number": 6,
+        "contract_name": "maribor",
+        "name": "PO\u0160TA - SLOM\u0160KOV TRG",
+        "address": "Slom\u0161kov trg 10",
+        "position": {
+            "lat": 46.558924,
+            "lng": 15.644443
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 7,
+        "available_bikes": 13,
+        "status": "OPEN",
+        "last_update": 1711309863000
+    },
+    {
+        "number": 22,
+        "contract_name": "maribor",
+        "name": "DVORANA TABOR",
+        "address": "Gorkega ulica 48",
+        "position": {
+            "lat": 46.549005,
+            "lng": 15.635014
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 5,
+        "available_bikes": 15,
+        "status": "OPEN",
+        "last_update": 1711309777000
+    },
+    {
+        "number": 14,
+        "contract_name": "maribor",
+        "name": "ULICA MO\u0160E PIJADA - UKC",
+        "address": "Ulica Mo\u0161e Pijada 6",
+        "position": {
+            "lat": 46.552652,
+            "lng": 15.646023
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 17,
+        "available_bikes": 3,
+        "status": "OPEN",
+        "last_update": 1711309817000
+    },
+    {
+        "number": 19,
+        "contract_name": "maribor",
+        "name": "LIDL - TITOVA C.",
+        "address": "Titova cesta 15",
+        "position": {
+            "lat": 46.551963,
+            "lng": 15.651564
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 0,
+        "available_bikes": 20,
+        "status": "OPEN",
+        "last_update": 1711309772000
+    },
+    {
+        "number": 25,
+        "contract_name": "maribor",
+        "name": "SPAR - TR\u017dNICA TABOR",
+        "address": "Kardeljeva c. 55",
+        "position": {
+            "lat": 46.542655,
+            "lng": 15.634329
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 12,
+        "available_bikes": 8,
+        "status": "OPEN",
+        "last_update": 1711310075000
+    },
+    {
+        "number": 17,
+        "contract_name": "maribor",
+        "name": "NA POLJANAH - HEROJA \u0160ERCERJA",
+        "address": "NA POLJANAH 53",
+        "position": {
+            "lat": 46.553109,
+            "lng": 15.624098
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 12,
+        "available_bikes": 8,
+        "status": "OPEN",
+        "last_update": 1711310286000
+    },
+    {
+        "number": 28,
+        "contract_name": "maribor",
+        "name": "UM FGPA - LENT - SODNI STOLP",
+        "address": "Pristan 6",
+        "position": {
+            "lat": 46.556731,
+            "lng": 15.64212
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 0,
+        "available_bikes": 20,
+        "status": "OPEN",
+        "last_update": 1711309963000
+    },
+    {
+        "number": 8,
+        "contract_name": "maribor",
+        "name": "RAZLAGOVA UL. - OB\u010cINA",
+        "address": "Razlagova ulica 1",
+        "position": {
+            "lat": 46.56196,
+            "lng": 15.650235
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 20,
+        "available_bikes": 0,
+        "status": "OPEN",
+        "last_update": 1711309777000
+    },
+    {
+        "number": 7,
+        "contract_name": "maribor",
+        "name": "PARTIZANSKA C. - TIC",
+        "address": "Partizanska cesta 6a",
+        "position": {
+            "lat": 46.560227,
+            "lng": 15.650781
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 6,
+        "available_bikes": 14,
+        "status": "OPEN",
+        "last_update": 1711310120000
+    },
+    {
+        "number": 2,
+        "contract_name": "maribor",
+        "name": "GOSPOSVETSKA C. - VRBANSKA C.",
+        "address": "Gosposvetska cesta 20",
+        "position": {
+            "lat": 46.561422,
+            "lng": 15.637118
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 22,
+        "available_bike_stands": 17,
+        "available_bikes": 5,
+        "status": "OPEN",
+        "last_update": 1711310220000
+    },
+    {
+        "number": 5,
+        "contract_name": "maribor",
+        "name": "MLADINSKA UL. - TRUBARJEVA UL.",
+        "address": "Mladinska ulica 15",
+        "position": {
+            "lat": 46.56294,
+            "lng": 15.644185
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 16,
+        "available_bike_stands": 11,
+        "available_bikes": 5,
+        "status": "OPEN",
+        "last_update": 1711310172000
+    },
+    {
+        "number": 12,
+        "contract_name": "maribor",
+        "name": "MLINSKA UL . - AVTOBUSNA POSTAJA",
+        "address": "Mlinska ulica 24",
+        "position": {
+            "lat": 46.558534,
+            "lng": 15.654739
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 14,
+        "available_bikes": 6,
+        "status": "OPEN",
+        "last_update": 1711309913000
+    },
+    {
+        "number": 29,
+        "contract_name": "maribor",
+        "name": "PETROL \u2013 LENT \u2013 VODNI STOLP",
+        "address": "Usnjarska ulica 5",
+        "position": {
+            "lat": 46.556534,
+            "lng": 15.647629
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 6,
+        "available_bikes": 14,
+        "status": "OPEN",
+        "last_update": 1711310044000
+    },
+    {
+        "number": 15,
+        "contract_name": "maribor",
+        "name": "LJUBLJANSKA UL. - II. GIMNAZIJA",
+        "address": "Ljubljanska ul. 30-25",
+        "position": {
+            "lat": 46.548853,
+            "lng": 15.645591
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 18,
+        "available_bikes": 2,
+        "status": "OPEN",
+        "last_update": 1711309887000
+    },
+    {
+        "number": 26,
+        "contract_name": "maribor",
+        "name": "NICEHASH - C. PROLETARSKIH BRIGAD",
+        "address": "C. PROLETARSKIH BRIGAD 71",
+        "position": {
+            "lat": 46.543986,
+            "lng": 15.629317
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 9,
+        "available_bikes": 11,
+        "status": "OPEN",
+        "last_update": 1711309747000
+    },
+    {
+        "number": 23,
+        "contract_name": "maribor",
+        "name": "LJUBLJANSKA UL. - FOCHEVA",
+        "address": "LJUBLJANSKA 41",
+        "position": {
+            "lat": 46.545947,
+            "lng": 15.644015
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 18,
+        "available_bikes": 2,
+        "status": "OPEN",
+        "last_update": 1711309954000
+    },
+    {
+        "number": 27,
+        "contract_name": "maribor",
+        "name": "JHMB \u2013 DVOETA\u017dNI MOST",
+        "address": "Cesta XIV. divizije",
+        "position": {
+            "lat": 46.554741,
+            "lng": 15.659814
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 4,
+        "available_bikes": 16,
+        "status": "OPEN",
+        "last_update": 1711310006000
+    },
+    {
+        "number": 18,
+        "contract_name": "maribor",
+        "name": "LIDL - KORO\u0160KA C.",
+        "address": "Koro\u0161ka cesta 173",
+        "position": {
+            "lat": 46.565603,
+            "lng": 15.623133
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 20,
+        "available_bikes": 0,
+        "status": "OPEN",
+        "last_update": 1711309807000
+    },
+    {
+        "number": 11,
+        "contract_name": "maribor",
+        "name": "PARTIZANSKA C. - CANKARJEVA UL.",
+        "address": "Partizanska c. 13",
+        "position": {
+            "lat": 46.56056,
+            "lng": 15.652935
+        },
+        "banking": false,
+        "bonus": false,
+        "bike_stands": 20,
+        "available_bike_stands": 7,
+        "available_bikes": 13,
+        "status": "OPEN",
+        "last_update": 1711309840000
+    }
+]
