@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+import joblib
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error, explained_variance_score
 from tensorflow.keras.models import Sequential
@@ -9,7 +9,6 @@ from tensorflow.keras.layers import SimpleRNN, Dense
 
 
 # OBDELAVA PODATKOV
-
 bike_data = pd.read_csv('../../data/mbajk_dataset.csv')
 
 # Sortiranje zapisov glede na čas zapis
@@ -32,7 +31,7 @@ train_model, test = time_series_np[:train_size], time_series_np[train_size:]
 scaler = StandardScaler()
 train_scaled = scaler.fit_transform(train_model)
 test_scaled = scaler.transform(test)
-
+joblib.dump(scaler, '../../models/standard_scaler.pkl')
 
 
 
@@ -115,6 +114,7 @@ def evaluate_model(model, X_test, y_test):
     return mse, mae, ev, y_pred_inv
 
 mse_rnn, mae_rnn, ev_rnn, predictions_inv_rnn = evaluate_model(rnn_model, X_test, y_test)
+
 
 # Open the file in write mode and save the printed values
 with open('../../reports/metrics.txt', "w") as file:
