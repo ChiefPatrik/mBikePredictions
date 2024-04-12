@@ -41,7 +41,23 @@ jobs:
       - name: Run fetch_data.py
         run: |
           poetry run python src/data/fetch_data.py
+          if [ $? -eq 0 ]; then
+            echo "fetch_data.py executed successfully."
+          else
+            echo "Error executing fetch_data.py"
+            exit 1
+          fi
 
+      - name: Run process_data.py
+        run: |
+          poetry run python src/data/process_data.py
+          if [ $? -eq 0 ]; then
+            echo "process_data.py executed successfully."
+          else
+            echo "Error executing process_data.py"
+            exit 1
+          fi
+          
       - name: Push fetched data to GitHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
