@@ -25,3 +25,8 @@ pytest = "^8.1.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+serve = "src.serve.api:main"
+train = "src.models.train_model:main"
+fetch = "src.data.fetch_data:main"
