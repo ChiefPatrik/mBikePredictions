@@ -61,7 +61,7 @@ def main():
         save_to_json(weather_data, "raw_weather_data.json")
         print("Data fetched and saved successfully!")
 
-        subprocess.run(["python", "process_data.py"])
+        #subprocess.run(["python", "process_data.py"])
     else:
         print("Failed to fetch station data.")
 
