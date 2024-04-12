@@ -61,12 +61,7 @@ def save_station_data(station, weather, filename):
         })
 
 
-def main():
-    station_json_filename = "raw_station_data.json"
-    weather_json_filename = "raw_weather_data.json"
-    station_data = read_json(raw_data_path, station_json_filename)
-    weather_data = read_json(raw_data_path, weather_json_filename)
-
+def process_data(station_data, weather_data):
     for i, station in enumerate(station_data):
         if i < len(weather_data):
             weather_entry = weather_data[i]
@@ -87,6 +82,13 @@ def main():
             print(f"Weather data not found for station {station['number']}")
 
     print("Data processed and saved to CSV files successfully!")
+
+def main():
+    station_json_filename = "raw_station_data.json"
+    weather_json_filename = "raw_weather_data.json"
+    station_data = read_json(raw_data_path, station_json_filename)
+    weather_data = read_json(raw_data_path, weather_json_filename)
+    process_data(station_data, weather_data)
 
 if __name__ == "__main__":
     main()
