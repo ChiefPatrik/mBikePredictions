@@ -4,3 +4,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 1,2024-04-13 12:00:00,GOSPOSVETSKA C. - TURNERJEVA UL.,Gosposvetska cesta 69,"{'lat': 46.562695, 'lng': 15.62935}",22.0,55,12.5,22.7,0,0.0,995.9,22,21
 1,2024-04-13 13:00:00,GOSPOSVETSKA C. - TURNERJEVA UL.,Gosposvetska cesta 69,"{'lat': 46.562695, 'lng': 15.62935}",23.1,50,12.2,24.0,0,0.0,995.3,22,22
 1,2024-04-13 14:00:00,GOSPOSVETSKA C. - TURNERJEVA UL.,Gosposvetska cesta 69,"{'lat': 46.562695, 'lng': 15.62935}",24.0,44,11.0,24.4,0,0.0,994.5,22,22
+1,2024-04-13 15:00:00,GOSPOSVETSKA C. - TURNERJEVA UL.,Gosposvetska cesta 69,"{'lat': 46.562695, 'lng': 15.62935}",24.4,42,10.7,23.9,0,0.0,993.7,22,18
