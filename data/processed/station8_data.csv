@@ -1,1 +1,2 @@
-8,2024-04-13 12:00:00,RAZLAGOVA UL. - OBČINA,Razlagova ulica 1,"{'lat': 46.56196, 'lng': 15.650235}",21.8,53,11.8,23.2,0,0.0,996.0,20,4
+number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point,apparent_temperature,precipitation_probability,rain,surface_pressure,bike_stands,available_bike_stands
+8,2024-04-13 13:00:00,RAZLAGOVA UL. - OBČINA,Razlagova ulica 1,"{'lat': 46.56196, 'lng': 15.650235}",23.0,49,11.7,23.9,0,0.0,995.3,20,4

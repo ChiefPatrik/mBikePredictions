@@ -1,1 +1,2 @@
-17,2024-04-13 12:00:00,NA POLJANAH - HEROJA ŠERCERJA,NA POLJANAH 53,"{'lat': 46.553109, 'lng': 15.624098}",22.1,58,13.4,23.6,0,0.0,995.7,20,17
+number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point,apparent_temperature,precipitation_probability,rain,surface_pressure,bike_stands,available_bike_stands
+17,2024-04-13 13:00:00,NA POLJANAH - HEROJA ŠERCERJA,NA POLJANAH 53,"{'lat': 46.553109, 'lng': 15.624098}",23.1,50,12.1,24.0,0,0.0,994.9,20,19
