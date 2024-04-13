@@ -31,7 +31,10 @@ def format_datetime(datetime_str):
 
 def save_station_data(station, weather, filename):
     fieldnames = ['number', 
-                  'datetime', 
+                  'datetime',
+                  'name',
+                  'address',
+                  'coordinates', 
                   'temperature', 
                   'relative_humidity', 
                   'dew_point', 
@@ -49,6 +52,9 @@ def save_station_data(station, weather, filename):
         writer.writerow({
             'number': station['number'],
             'datetime': format_datetime(weather['datetime']),
+            'name': station['name'],
+            'address': station['address'],
+            'coordinates': station['position'],
             'temperature': weather['temperature_2m'],
             'relative_humidity': weather['relative_humidity_2m'],
             'dew_point': weather['dew_point_2m'],
