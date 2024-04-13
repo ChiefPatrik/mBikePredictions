@@ -1,3 +1,4 @@
 number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point,apparent_temperature,precipitation_probability,rain,surface_pressure,bike_stands,available_bike_stands
 28,2024-04-13 13:00:00,UM FGPA - LENT - SODNI STOLP,Pristan 6,"{'lat': 46.556731, 'lng': 15.64212}",23.3,47,11.4,23.9,0,0.0,997.2,20,9
 28,2024-04-13 11:00:00,UM FGPA - LENT - SODNI STOLP,Pristan 6,"{'lat': 46.556731, 'lng': 15.64212}",20.4,56,11.3,20.6,0,0.0,998.0,20,7
+28,2024-04-13 12:00:00,UM FGPA - LENT - SODNI STOLP,Pristan 6,"{'lat': 46.556731, 'lng': 15.64212}",22.0,53,12.0,22.7,0,0.0,997.9,20,13
