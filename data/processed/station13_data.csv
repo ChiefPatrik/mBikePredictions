@@ -2,3 +2,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 13,2024-04-13 13:00:00,PARTIZANSKA C. - ŽELEZNIŠKA POSTAJA,Partizanska cesta 46-48,"{'lat': 46.561555, 'lng': 15.65692}",23.1,49,11.8,24.0,0,0.0,996.4,20,1
 13,2024-04-13 11:00:00,PARTIZANSKA C. - ŽELEZNIŠKA POSTAJA,Partizanska cesta 46-48,"{'lat': 46.561555, 'lng': 15.65692}",20.2,59,11.9,20.8,0,0.0,997.2,20,1
 13,2024-04-13 12:00:00,PARTIZANSKA C. - ŽELEZNIŠKA POSTAJA,Partizanska cesta 46-48,"{'lat': 46.561555, 'lng': 15.65692}",21.9,54,12.2,22.9,0,0.0,997.1,20,1
+13,2024-04-13 13:00:00,PARTIZANSKA C. - ŽELEZNIŠKA POSTAJA,Partizanska cesta 46-48,"{'lat': 46.561555, 'lng': 15.65692}",23.1,49,11.8,24.0,0,0.0,996.4,20,2
