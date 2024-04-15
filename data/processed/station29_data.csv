@@ -42,3 +42,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 29,2024-04-15 19:00:00,PETROL – LENT – VODNI STOLP,Usnjarska ulica 5,"{'lat': 46.556534, 'lng': 15.647629}",22.5,37,7.1,19.8,0,0.1,974.9,20,16
 29,2024-04-15 20:00:00,PETROL – LENT – VODNI STOLP,Usnjarska ulica 5,"{'lat': 46.556534, 'lng': 15.647629}",21.8,35,5.6,18.9,0,0.1,974.3,20,14
 29,2024-04-15 21:00:00,PETROL – LENT – VODNI STOLP,Usnjarska ulica 5,"{'lat': 46.556534, 'lng': 15.647629}",21.0,36,5.4,18.5,0,0.1,974.0,20,18
+29,2024-04-16 00:00:00,PETROL – LENT – VODNI STOLP,Usnjarska ulica 5,"{'lat': 46.556534, 'lng': 15.647629}",16.3,60,8.5,14.5,0,0.1,973.1,20,20
