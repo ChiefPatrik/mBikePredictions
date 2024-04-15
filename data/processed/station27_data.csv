@@ -23,3 +23,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 27,2024-04-14 14:00:00,JHMB – DVOETAŽNI MOST,Cesta XIV. divizije,"{'lat': 46.554741, 'lng': 15.659814}",28.9,32,10.5,28.1,0,0.0,990.5,20,9
 27,2024-04-14 21:00:00,JHMB – DVOETAŽNI MOST,Cesta XIV. divizije,"{'lat': 46.554741, 'lng': 15.659814}",20.4,54,10.8,20.1,0,0.0,986.2,20,0
 27,2024-04-15 00:00:00,JHMB – DVOETAŽNI MOST,Cesta XIV. divizije,"{'lat': 46.554741, 'lng': 15.659814}",15.8,69,10.1,15.1,0,0.0,986.1,20,0
+27,2024-04-15 03:00:00,JHMB – DVOETAŽNI MOST,Cesta XIV. divizije,"{'lat': 46.554741, 'lng': 15.659814}",14.5,74,9.9,14.4,0,0.0,985.0,20,0
