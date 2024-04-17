@@ -77,3 +77,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 19,2024-04-17 06:00:00,LIDL - TITOVA C.,Titova cesta 15,"{'lat': 46.551963, 'lng': 15.651564}",1.5,99,1.4,-0.7,0,0.0,972.4,20,6
 19,2024-04-17 07:00:00,LIDL - TITOVA C.,Titova cesta 15,"{'lat': 46.551963, 'lng': 15.651564}",1.1,100,1.1,-1.0,0,0.0,972.5,20,7
 19,2024-04-17 08:00:00,LIDL - TITOVA C.,Titova cesta 15,"{'lat': 46.551963, 'lng': 15.651564}",2.3,96,1.7,-0.1,0,0.0,972.6,20,7
+19,2024-04-17 09:00:00,LIDL - TITOVA C.,Titova cesta 15,"{'lat': 46.551963, 'lng': 15.651564}",5.2,84,2.7,2.7,1,0.0,973.1,20,7
