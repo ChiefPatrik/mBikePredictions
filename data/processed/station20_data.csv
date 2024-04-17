@@ -81,3 +81,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 20,2024-04-17 10:00:00,EUROPARK - POBREŠKA C.,Pobreška cesta 18,"{'lat': 46.554703, 'lng': 15.652826}",7.6,77,3.8,5.2,2,0.0,975.6,21,9
 20,2024-04-17 11:00:00,EUROPARK - POBREŠKA C.,Pobreška cesta 18,"{'lat': 46.554703, 'lng': 15.652826}",9.4,70,4.2,8.7,3,0.0,975.6,21,0
 20,2024-04-17 12:00:00,EUROPARK - POBREŠKA C.,Pobreška cesta 18,"{'lat': 46.554703, 'lng': 15.652826}",10.8,58,2.9,8.7,35,0.0,975.2,21,3
+20,2024-04-17 13:00:00,EUROPARK - POBREŠKA C.,Pobreška cesta 18,"{'lat': 46.554703, 'lng': 15.652826}",12.0,52,2.5,10.4,59,0.0,974.4,21,11
