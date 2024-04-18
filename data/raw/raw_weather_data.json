@@ -2,7 +2,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.639999,
-        "generationtime_ms": 0.11801719665527344,
+        "generationtime_ms": 0.10597705841064453,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -167,12 +167,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -231,7 +231,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.08499622344970703,
+        "generationtime_ms": 0.08296966552734375,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -397,12 +397,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -461,7 +461,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.08106231689453125,
+        "generationtime_ms": 0.09703636169433594,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -627,12 +627,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -691,7 +691,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.051021575927734375,
+        "generationtime_ms": 0.07200241088867188,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -857,12 +857,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -921,7 +921,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.102996826171875,
+        "generationtime_ms": 0.05900859832763672,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -1087,12 +1087,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -1151,7 +1151,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.08594989776611328,
+        "generationtime_ms": 0.04100799560546875,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -1317,12 +1317,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -1381,7 +1381,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.619999,
-        "generationtime_ms": 0.0629425048828125,
+        "generationtime_ms": 0.12600421905517578,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -1547,12 +1547,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -1611,7 +1611,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.048041343688964844,
+        "generationtime_ms": 0.0629425048828125,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -1777,12 +1777,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -1841,7 +1841,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.10597705841064453,
+        "generationtime_ms": 0.0959634780883789,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -2007,12 +2007,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -2071,7 +2071,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.08594989776611328,
+        "generationtime_ms": 0.10204315185546875,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -2237,12 +2237,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -2301,7 +2301,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.08702278137207031,
+        "generationtime_ms": 0.11801719665527344,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -2467,12 +2467,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -2531,7 +2531,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.639999,
-        "generationtime_ms": 0.11992454528808594,
+        "generationtime_ms": 0.09500980377197266,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -2697,12 +2697,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -2761,7 +2761,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.08308887481689453,
+        "generationtime_ms": 0.07092952728271484,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -2927,12 +2927,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -2991,7 +2991,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.08594989776611328,
+        "generationtime_ms": 0.09799003601074219,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -3157,12 +3157,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -3221,7 +3221,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.639999,
-        "generationtime_ms": 0.08404254913330078,
+        "generationtime_ms": 0.11992454528808594,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -3387,12 +3387,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -3451,7 +3451,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.619999,
-        "generationtime_ms": 0.102996826171875,
+        "generationtime_ms": 0.08893013000488281,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -3617,11 +3617,11 @@
                 100,
                 100,
                 100,
-                99,
-                98,
-                97,
-                65,
-                32,
+                95,
+                89,
+                84,
+                56,
+                28,
                 0
             ],
             "rain": [
@@ -3681,7 +3681,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.07903575897216797,
+        "generationtime_ms": 0.07104873657226562,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -3847,12 +3847,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -3911,7 +3911,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.10395050048828125,
+        "generationtime_ms": 0.07510185241699219,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -4077,12 +4077,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -4141,7 +4141,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.10097026824951172,
+        "generationtime_ms": 0.07903575897216797,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -4307,12 +4307,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -4371,7 +4371,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.06794929504394531,
+        "generationtime_ms": 0.04208087921142578,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -4537,12 +4537,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -4601,7 +4601,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.0940561294555664,
+        "generationtime_ms": 0.10895729064941406,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -4767,12 +4767,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -4831,7 +4831,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.07200241088867188,
+        "generationtime_ms": 0.08499622344970703,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -4997,12 +4997,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -5061,7 +5061,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.05710124969482422,
+        "generationtime_ms": 0.07092952728271484,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -5227,12 +5227,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -5291,7 +5291,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.639999,
-        "generationtime_ms": 0.04303455352783203,
+        "generationtime_ms": 0.06699562072753906,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -5457,12 +5457,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -5521,7 +5521,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.619999,
-        "generationtime_ms": 0.04792213439941406,
+        "generationtime_ms": 0.0890493392944336,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -5687,12 +5687,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -5751,7 +5751,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.639999,
-        "generationtime_ms": 0.04303455352783203,
+        "generationtime_ms": 0.06902217864990234,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -5917,12 +5917,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -5981,7 +5981,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.09500980377197266,
+        "generationtime_ms": 0.09298324584960938,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -6147,12 +6147,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
@@ -6211,7 +6211,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.619999,
-        "generationtime_ms": 0.102996826171875,
+        "generationtime_ms": 0.09500980377197266,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -6377,11 +6377,11 @@
                 100,
                 100,
                 100,
-                99,
-                98,
-                97,
-                65,
-                32,
+                95,
+                89,
+                84,
+                56,
+                28,
                 0
             ],
             "rain": [
@@ -6441,7 +6441,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.07700920104980469,
+        "generationtime_ms": 0.0749826431274414,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -6607,12 +6607,12 @@
                 92,
                 95,
                 97,
-                89,
-                82,
-                74,
-                49,
-                25,
-                0
+                93,
+                88,
+                84,
+                59,
+                35,
+                10
             ],
             "rain": [
                 0.0,
