@@ -105,3 +105,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 24,2024-04-18 10:00:00,"VZAJEMNA, VARUH ZDRAVJA - BETNAVSKA C.",Betnavska c. 83,"{'lat': 46.54199, 'lng': 15.63831}",8.4,73,3.9,6.8,26,0.0,976.9,20,14
 24,2024-04-18 11:00:00,"VZAJEMNA, VARUH ZDRAVJA - BETNAVSKA C.",Betnavska c. 83,"{'lat': 46.54199, 'lng': 15.63831}",10.5,50,0.5,7.3,39,0.0,976.6,20,9
 24,2024-04-18 12:00:00,"VZAJEMNA, VARUH ZDRAVJA - BETNAVSKA C.",Betnavska c. 83,"{'lat': 46.54199, 'lng': 15.63831}",10.1,57,1.9,6.7,75,0.0,977.3,20,8
+24,2024-04-18 13:00:00,"VZAJEMNA, VARUH ZDRAVJA - BETNAVSKA C.",Betnavska c. 83,"{'lat': 46.54199, 'lng': 15.63831}",11.2,54,2.3,9.5,83,0.0,977.1,20,10
