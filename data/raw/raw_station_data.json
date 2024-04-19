@@ -11,10 +11,10 @@
         "banking": false,
         "bonus": false,
         "bike_stands": 20,
-        "available_bike_stands": 5,
-        "available_bikes": 15,
+        "available_bike_stands": 4,
+        "available_bikes": 16,
         "status": "OPEN",
-        "last_update": 1713481495000
+        "last_update": 1713486336000
     },
     {
         "number": 10,
@@ -31,7 +31,7 @@
         "available_bike_stands": 18,
         "available_bikes": 2,
         "status": "OPEN",
-        "last_update": 1713481491000
+        "last_update": 1713486332000
     },
     {
         "number": 9,
@@ -45,10 +45,10 @@
         "banking": false,
         "bonus": false,
         "bike_stands": 20,
-        "available_bike_stands": 13,
-        "available_bikes": 7,
+        "available_bike_stands": 12,
+        "available_bikes": 8,
         "status": "OPEN",
-        "last_update": 1713481402000
+        "last_update": 1713486848000
     },
     {
         "number": 13,
@@ -62,10 +62,10 @@
         "banking": false,
         "bonus": false,
         "bike_stands": 20,
-        "available_bike_stands": 9,
-        "available_bikes": 11,
+        "available_bike_stands": 10,
+        "available_bikes": 10,
         "status": "OPEN",
-        "last_update": 1713481379000
+        "last_update": 1713486826000
     },
     {
         "number": 20,
@@ -82,7 +82,7 @@
         "available_bike_stands": 12,
         "available_bikes": 9,
         "status": "OPEN",
-        "last_update": 1713481387000
+        "last_update": 1713486834000
     },
     {
         "number": 4,
@@ -99,7 +99,7 @@
         "available_bike_stands": 8,
         "available_bikes": 12,
         "status": "OPEN",
-        "last_update": 1713481491000
+        "last_update": 1713486334000
     },
     {
         "number": 1,
@@ -113,10 +113,10 @@
         "banking": false,
         "bonus": false,
         "bike_stands": 22,
-        "available_bike_stands": 6,
-        "available_bikes": 16,
+        "available_bike_stands": 5,
+        "available_bikes": 17,
         "status": "OPEN",
-        "last_update": 1713481605000
+        "last_update": 1713486448000
     },
     {
         "number": 16,
@@ -130,10 +130,10 @@
         "banking": false,
         "bonus": false,
         "bike_stands": 20,
-        "available_bike_stands": 4,
-        "available_bikes": 16,
+        "available_bike_stands": 3,
+        "available_bikes": 17,
         "status": "OPEN",
-        "last_update": 1713481504000
+        "last_update": 1713486347000
     },
     {
         "number": 3,
@@ -150,7 +150,7 @@
         "available_bike_stands": 17,
         "available_bikes": 3,
         "status": "OPEN",
-        "last_update": 1713481402000
+        "last_update": 1713486849000
     },
     {
         "number": 21,
@@ -167,7 +167,7 @@
         "available_bike_stands": 10,
         "available_bikes": 10,
         "status": "OPEN",
-        "last_update": 1713481427000
+        "last_update": 1713486874000
     },
     {
         "number": 6,
@@ -181,10 +181,10 @@
         "banking": false,
         "bonus": false,
         "bike_stands": 20,
-        "available_bike_stands": 19,
-        "available_bikes": 1,
+        "available_bike_stands": 20,
+        "available_bikes": 0,
         "status": "OPEN",
-        "last_update": 1713481446000
+        "last_update": 1713486891000
     },
     {
         "number": 22,
@@ -201,7 +201,7 @@
         "available_bike_stands": 16,
         "available_bikes": 4,
         "status": "OPEN",
-        "last_update": 1713481373000
+        "last_update": 1713486820000
     },
     {
         "number": 14,
@@ -218,7 +218,7 @@
         "available_bike_stands": 13,
         "available_bikes": 7,
         "status": "OPEN",
-        "last_update": 1713481457000
+        "last_update": 1713486299000
     },
     {
         "number": 19,
@@ -235,7 +235,7 @@
         "available_bike_stands": 10,
         "available_bikes": 10,
         "status": "OPEN",
-        "last_update": 1713481306000
+        "last_update": 1713486752000
     },
     {
         "number": 25,
@@ -252,7 +252,7 @@
         "available_bike_stands": 6,
         "available_bikes": 14,
         "status": "OPEN",
-        "last_update": 1713481601000
+        "last_update": 1713486442000
     },
     {
         "number": 17,
@@ -269,7 +269,7 @@
         "available_bike_stands": 14,
         "available_bikes": 6,
         "status": "OPEN",
-        "last_update": 1713481411000
+        "last_update": 1713486859000
     },
     {
         "number": 28,
@@ -286,7 +286,7 @@
         "available_bike_stands": 10,
         "available_bikes": 10,
         "status": "OPEN",
-        "last_update": 1713481489000
+        "last_update": 1713486331000
     },
     {
         "number": 8,
@@ -303,7 +303,7 @@
         "available_bike_stands": 10,
         "available_bikes": 10,
         "status": "OPEN",
-        "last_update": 1713481432000
+        "last_update": 1713486879000
     },
     {
         "number": 7,
@@ -320,7 +320,7 @@
         "available_bike_stands": 17,
         "available_bikes": 3,
         "status": "OPEN",
-        "last_update": 1713481155000
+        "last_update": 1713486600000
     },
     {
         "number": 2,
@@ -337,7 +337,7 @@
         "available_bike_stands": 3,
         "available_bikes": 19,
         "status": "OPEN",
-        "last_update": 1713481436000
+        "last_update": 1713486883000
     },
     {
         "number": 5,
@@ -351,10 +351,10 @@
         "banking": false,
         "bonus": false,
         "bike_stands": 16,
-        "available_bike_stands": 9,
-        "available_bikes": 7,
+        "available_bike_stands": 10,
+        "available_bikes": 6,
         "status": "OPEN",
-        "last_update": 1713481410000
+        "last_update": 1713486859000
     },
     {
         "number": 12,
@@ -371,7 +371,7 @@
         "available_bike_stands": 9,
         "available_bikes": 11,
         "status": "OPEN",
-        "last_update": 1713481592000
+        "last_update": 1713486809000
     },
     {
         "number": 29,
@@ -388,7 +388,7 @@
         "available_bike_stands": 17,
         "available_bikes": 3,
         "status": "OPEN",
-        "last_update": 1713481446000
+        "last_update": 1713486894000
     },
     {
         "number": 15,
@@ -405,7 +405,7 @@
         "available_bike_stands": 9,
         "available_bikes": 11,
         "status": "OPEN",
-        "last_update": 1713481420000
+        "last_update": 1713486866000
     },
     {
         "number": 26,
@@ -422,7 +422,7 @@
         "available_bike_stands": 6,
         "available_bikes": 14,
         "status": "OPEN",
-        "last_update": 1713481671000
+        "last_update": 1713486627000
     },
     {
         "number": 23,
@@ -436,10 +436,10 @@
         "banking": false,
         "bonus": false,
         "bike_stands": 20,
-        "available_bike_stands": 10,
-        "available_bikes": 9,
+        "available_bike_stands": 9,
+        "available_bikes": 10,
         "status": "OPEN",
-        "last_update": 1713481629000
+        "last_update": 1713486471000
     },
     {
         "number": 27,
@@ -456,7 +456,7 @@
         "available_bike_stands": 10,
         "available_bikes": 10,
         "status": "OPEN",
-        "last_update": 1713481499000
+        "last_update": 1713486341000
     },
     {
         "number": 18,
@@ -473,7 +473,7 @@
         "available_bike_stands": 11,
         "available_bikes": 9,
         "status": "OPEN",
-        "last_update": 1713481404000
+        "last_update": 1713486851000
     },
     {
         "number": 11,
@@ -490,6 +490,6 @@
         "available_bike_stands": 17,
         "available_bikes": 3,
         "status": "OPEN",
-        "last_update": 1713481483000
+        "last_update": 1713486325000
     }
 ]
