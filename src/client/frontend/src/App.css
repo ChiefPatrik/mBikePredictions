@@ -1,0 +1,58 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 100%;
+}
+
+.app-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* This ensures that the container takes up the full height of the viewport */
+}
+
+.station-card {
+  width: 400px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.station-card:hover {
+  cursor: pointer;
+}
+
+.station-container {
+  text-align: center;
+}
+
+.prediction-container {
+  display: flex;
+  justify-content: center;
+}
+
+.prediction-item {
+  margin: 0 10px;
+  text-align: center;
+}
+
+.station-card h2 {
+  text-align: center; /* Center the headings */
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+}
+
+.prediction-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.time {
+  margin-right: 10px; /* Adjust margin as needed */
+}

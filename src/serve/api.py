@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException
 import uvicorn
 from pydantic import BaseModel
 from typing import List
+from fastapi.middleware.cors import CORSMiddleware
+
 #from src.models.predict_model import predict_model
 import pandas as pd
 import os
@@ -19,6 +21,15 @@ time_interval = 7
 
 # Create server
 app = FastAPI()
+# Allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 def fetch_fresh_weather_data(coordinates_lat, coordinates_lng):
     url = f"https://api.open-meteo.com/v1/forecast?latitude={coordinates_lat}&longitude={coordinates_lng}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,rain,surface_pressure&forecast_days=2&timezone=auto"
