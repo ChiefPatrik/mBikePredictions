@@ -152,3 +152,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 16,2024-04-20 10:00:00,KOROŠKA C. - KOROŠKI VETER,Koroška cesta 74,"{'lat': 46.559319, 'lng': 15.63498}",10.9,54,2.0,8.3,1,0.0,978.0,20,19
 16,2024-04-20 11:00:00,KOROŠKA C. - KOROŠKI VETER,Koroška cesta 74,"{'lat': 46.559319, 'lng': 15.63498}",12.1,45,0.5,9.7,0,0.0,978.5,20,18
 16,2024-04-20 12:00:00,KOROŠKA C. - KOROŠKI VETER,Koroška cesta 74,"{'lat': 46.559319, 'lng': 15.63498}",13.4,35,-1.8,10.9,28,0.0,978.6,20,17
+16,2024-04-20 13:00:00,KOROŠKA C. - KOROŠKI VETER,Koroška cesta 74,"{'lat': 46.559319, 'lng': 15.63498}",13.9,40,0.5,12.1,58,0.0,978.4,20,20
