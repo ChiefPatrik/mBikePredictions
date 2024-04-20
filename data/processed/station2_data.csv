@@ -142,3 +142,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 2,2024-04-20 01:00:00,GOSPOSVETSKA C. - VRBANSKA C.,Gosposvetska cesta 20,"{'lat': 46.561422, 'lng': 15.637118}",6.2,67,0.5,4.0,0,0.0,974.7,22,14
 2,2024-04-20 02:00:00,GOSPOSVETSKA C. - VRBANSKA C.,Gosposvetska cesta 20,"{'lat': 46.561422, 'lng': 15.637118}",4.4,80,1.2,2.4,0,0.0,974.9,22,14
 2,2024-04-20 02:00:00,GOSPOSVETSKA C. - VRBANSKA C.,Gosposvetska cesta 20,"{'lat': 46.561422, 'lng': 15.637118}",4.4,80,1.2,2.4,0,0.0,974.9,22,14
+2,2024-04-20 03:00:00,GOSPOSVETSKA C. - VRBANSKA C.,Gosposvetska cesta 20,"{'lat': 46.561422, 'lng': 15.637118}",4.7,82,1.9,2.8,0,0.0,974.5,22,14
