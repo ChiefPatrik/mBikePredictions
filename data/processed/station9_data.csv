@@ -171,3 +171,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 9,2024-04-21 05:00:00,NKBM - TRG LEONA ŠTUKLJA,Ulica slovenske osamosvojitve 5,"{'lat': 46.558519, 'lng': 15.649072}",2.3,77,-1.3,-0.7,0,0.0,983.4,20,14
 9,2024-04-21 06:00:00,NKBM - TRG LEONA ŠTUKLJA,Ulica slovenske osamosvojitve 5,"{'lat': 46.558519, 'lng': 15.649072}",1.5,81,-1.4,-1.2,0,0.0,983.2,20,14
 9,2024-04-21 07:00:00,NKBM - TRG LEONA ŠTUKLJA,Ulica slovenske osamosvojitve 5,"{'lat': 46.558519, 'lng': 15.649072}",1.3,83,-1.3,-1.4,0,0.0,983.4,20,13
+9,2024-04-21 08:00:00,NKBM - TRG LEONA ŠTUKLJA,Ulica slovenske osamosvojitve 5,"{'lat': 46.558519, 'lng': 15.649072}",3.9,78,0.4,1.5,0,0.0,983.4,20,12
