@@ -16,7 +16,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 processed_data_dir = os.path.join(current_dir, '..', '..', 'data', 'processed')
 models_dir = os.path.join(current_dir, '..', '..', 'models')
 reports_dir = os.path.join(current_dir, '..', '..', 'reports')
-window_size = 20 
+window_size = 30 
 
 # ====================
 # IZRISOVANJE GRAFOV

@@ -47,15 +47,25 @@ function App() {
 
   const renderPredictions = () => {
     const currentTime = new Date();
-    return Array.from({ length: 7 }, (_, index) => {
-      const time = new Date(currentTime.getTime() + (index + 1) * 3600000);
-      return (
-        <div key={index} className="prediction-row">
-          <div className="time">{`${time.getHours()}:${time.getMinutes().toString().padStart(2, '0')}`}</div>
-          <div className="prediction">{predictions[index]}</div>
-        </div>
-      );
-    });
+    const nextFullHour = new Date(currentTime);
+    nextFullHour.setHours(nextFullHour.getHours() + 1);
+    nextFullHour.setMinutes(0);
+    nextFullHour.setSeconds(0);
+  
+    return (
+      <div className="predictions-container">
+        {Array.from({ length: 7 }, (_, index) => {
+          const time = new Date(nextFullHour.getTime() + index * 3600000);
+          return (
+            <div key={index} className="prediction-row">
+              <div className="time">{`${time.getHours()}:${time.getMinutes().toString().padStart(2, '0')}`}</div>
+              <img src="/parking.png" alt="Available Bike Stands" className="icon" />
+              <div className="prediction">{predictions[index]}</div>
+            </div>
+          );
+        })}
+      </div>
+    );
   };
   
 
@@ -68,14 +78,16 @@ function App() {
             {clickedStation === index + 1 && (
               <>
                 <div>
-                  <p>Name: {station.name}</p>
-                  <p>Address: {station.address}</p>
-                  <p>Bike stands: {station.bike_stands}</p>
-                  <div>
-                    <img src="/bike.png" alt="Available Bikes" className="icon" /><span style={{ fontSize: '16px', marginRight: '20px' }}>{station.available_bikes}</span>
-                    <img src="/parking.png" alt="Available Bike Stands" className="icon" /><span style={{ fontSize: '16px', marginRight: '20px' }}>{station.available_bike_stands}</span>
+                  <p>NAME: {station.name}</p>
+                  <p>ADDRESS: {station.address}</p>
+                  <p>BIKE STANDS: {station.bike_stands}</p>
+                  <div className="info-container">
+                    <img src="/bike.png" alt="Available Bikes" className="icon" /><span style={{ fontSize: '30px', marginRight: '20px' }}>{station.available_bikes}</span>
+                    <img src="/parking.png" alt="Available Bike Stands" className="icon" /><span style={{ fontSize: '30px', marginRight: '20px' }}>{station.available_bike_stands}</span>
                   </div>
-                  <button onClick={() => handlePredictClick(station.number)}>Predict available bike stands</button>
+                  <div className="info-container">
+                    <button className="predict-button" onClick={() => handlePredictClick(station.number)}>PREDICT</button>
+                  </div>
                 </div>
                 {showPredictions && selectedStationNumber === station.number && (
                   <div className="predictions-container">
