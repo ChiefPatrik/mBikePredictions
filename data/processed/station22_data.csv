@@ -185,3 +185,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 22,2024-04-21 19:00:00,DVORANA TABOR,Gorkega ulica 48,"{'lat': 46.549005, 'lng': 15.635014}",10.3,39,-3.1,6.6,29,0.0,981.6,20,16
 22,2024-04-21 20:00:00,DVORANA TABOR,Gorkega ulica 48,"{'lat': 46.549005, 'lng': 15.635014}",8.8,46,-2.2,5.8,6,0.0,981.4,20,16
 22,2024-04-22 00:00:00,DVORANA TABOR,Gorkega ulica 48,"{'lat': 46.549005, 'lng': 15.635014}",5.1,61,-1.9,1.7,0,0.0,984.8,20,17
+22,2024-04-22 00:00:00,DVORANA TABOR,Gorkega ulica 48,"{'lat': 46.549005, 'lng': 15.635014}",5.1,64,-1.2,2.1,0,0.1,984.4,20,17
