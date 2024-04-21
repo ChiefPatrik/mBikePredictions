@@ -2,7 +2,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.639999,
-        "generationtime_ms": 0.10204315185546875,
+        "generationtime_ms": 0.06198883056640625,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -231,7 +231,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.07700920104980469,
+        "generationtime_ms": 0.04506111145019531,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -461,7 +461,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.1010894775390625,
+        "generationtime_ms": 0.12195110321044922,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -691,7 +691,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.07796287536621094,
+        "generationtime_ms": 0.11396408081054688,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -921,7 +921,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.09000301361083984,
+        "generationtime_ms": 0.04601478576660156,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -1151,7 +1151,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.06699562072753906,
+        "generationtime_ms": 0.034928321838378906,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -1381,7 +1381,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.619999,
-        "generationtime_ms": 0.06699562072753906,
+        "generationtime_ms": 0.09202957153320312,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -1611,7 +1611,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.05900859832763672,
+        "generationtime_ms": 0.0749826431274414,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -1841,7 +1841,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.06699562072753906,
+        "generationtime_ms": 0.1310110092163086,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -2071,7 +2071,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.0680685043334961,
+        "generationtime_ms": 0.07593631744384766,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -2301,7 +2301,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.05793571472167969,
+        "generationtime_ms": 0.06198883056640625,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -2531,7 +2531,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.639999,
-        "generationtime_ms": 0.07700920104980469,
+        "generationtime_ms": 0.06306171417236328,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -2761,7 +2761,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.05996227264404297,
+        "generationtime_ms": 0.04494190216064453,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -2991,7 +2991,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.09000301361083984,
+        "generationtime_ms": 0.0940561294555664,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -3221,7 +3221,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.639999,
-        "generationtime_ms": 0.06699562072753906,
+        "generationtime_ms": 0.07200241088867188,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -3451,7 +3451,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.619999,
-        "generationtime_ms": 0.0699758529663086,
+        "generationtime_ms": 0.041961669921875,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -3681,7 +3681,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.08594989776611328,
+        "generationtime_ms": 0.034928321838378906,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -3911,7 +3911,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.06091594696044922,
+        "generationtime_ms": 0.07593631744384766,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -4141,7 +4141,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.07998943328857422,
+        "generationtime_ms": 0.08797645568847656,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -4371,7 +4371,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.05900859832763672,
+        "generationtime_ms": 0.06389617919921875,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -4831,7 +4831,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.05602836608886719,
+        "generationtime_ms": 0.06091594696044922,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -5061,7 +5061,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.639999,
-        "generationtime_ms": 0.08308887481689453,
+        "generationtime_ms": 0.0680685043334961,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -5291,7 +5291,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.639999,
-        "generationtime_ms": 0.06401538848876953,
+        "generationtime_ms": 0.06198883056640625,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -5521,7 +5521,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.619999,
-        "generationtime_ms": 0.09500980377197266,
+        "generationtime_ms": 0.0820159912109375,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -5751,7 +5751,7 @@
     {
         "latitude": 46.54,
         "longitude": 15.639999,
-        "generationtime_ms": 0.09202957153320312,
+        "generationtime_ms": 0.0629425048828125,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -5981,7 +5981,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.06604194641113281,
+        "generationtime_ms": 0.06496906280517578,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -6211,7 +6211,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.619999,
-        "generationtime_ms": 0.09000301361083984,
+        "generationtime_ms": 0.05507469177246094,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
@@ -6441,7 +6441,7 @@
     {
         "latitude": 46.56,
         "longitude": 15.66,
-        "generationtime_ms": 0.06496906280517578,
+        "generationtime_ms": 0.03707408905029297,
         "utc_offset_seconds": 7200,
         "timezone": "Europe/Ljubljana",
         "timezone_abbreviation": "CEST",
