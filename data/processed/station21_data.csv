@@ -182,3 +182,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 21,2024-04-21 16:00:00,GORKEGA UL. - OŠ FRANCETA PREŠERNA,Gorkega ulica 32,"{'lat': 46.550683, 'lng': 15.639333}",12.3,34,-3.2,8.5,19,0.0,980.2,20,17
 21,2024-04-21 17:00:00,GORKEGA UL. - OŠ FRANCETA PREŠERNA,Gorkega ulica 32,"{'lat': 46.550683, 'lng': 15.639333}",11.9,35,-3.1,7.9,23,0.0,980.4,20,18
 21,2024-04-21 18:00:00,GORKEGA UL. - OŠ FRANCETA PREŠERNA,Gorkega ulica 32,"{'lat': 46.550683, 'lng': 15.639333}",10.9,39,-2.5,7.1,26,0.0,980.8,20,20
+21,2024-04-21 19:00:00,GORKEGA UL. - OŠ FRANCETA PREŠERNA,Gorkega ulica 32,"{'lat': 46.550683, 'lng': 15.639333}",10.3,39,-3.1,6.5,29,0.0,981.6,20,18
