@@ -194,3 +194,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 3,2024-04-22 05:00:00,GOSPOSVETSKA C. - III. GIMNAZIJA,Gosposvetska cesta 4,"{'lat': 46.560761, 'lng': 15.64053}",1.0,88,-0.8,-1.6,0,0.0,984.6,20,17
 3,2024-04-22 06:00:00,GOSPOSVETSKA C. - III. GIMNAZIJA,Gosposvetska cesta 4,"{'lat': 46.560761, 'lng': 15.64053}",0.5,88,-1.2,-1.9,0,0.0,984.6,20,13
 3,2024-04-22 07:00:00,GOSPOSVETSKA C. - III. GIMNAZIJA,Gosposvetska cesta 4,"{'lat': 46.560761, 'lng': 15.64053}",0.2,88,-1.5,-2.3,0,0.0,985.4,20,7
+3,2024-04-22 08:00:00,GOSPOSVETSKA C. - III. GIMNAZIJA,Gosposvetska cesta 4,"{'lat': 46.560761, 'lng': 15.64053}",2.7,76,-1.1,0.2,0,0.1,984.9,20,6
