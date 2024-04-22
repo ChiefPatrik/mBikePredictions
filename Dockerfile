@@ -17,7 +17,7 @@ RUN poetry config virtualenvs.create false && poetry install --no-root
 COPY . /app
 
 # Expose port 3000
-EXPOSE 3000
+EXPOSE 3001
 
 # Command to run the application
 CMD ["poetry", "run", "python", "src/serve/api.py"]

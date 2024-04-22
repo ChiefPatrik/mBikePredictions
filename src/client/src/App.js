@@ -33,7 +33,7 @@ function App() {
   const handlePredictClick = async (stationNumber) => {
     try {
       console.log('stationNumber:', stationNumber);
-      const response = await axios.post('http://localhost:3000/mbajk/predict/', {
+      const response = await axios.post('http://localhost:3001/mbajk/predict/', {
         data: [{ station_number: stationNumber }]
       });
       console.log('response:', response.data.predictions)
