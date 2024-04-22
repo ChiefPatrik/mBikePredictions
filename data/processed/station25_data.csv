@@ -200,3 +200,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 25,2024-04-22 11:00:00,SPAR - TRŽNICA TABOR,Kardeljeva c. 55,"{'lat': 46.542655, 'lng': 15.634329}",8.3,52,-1.0,5.1,0,0.1,985.6,20,14
 25,2024-04-22 12:00:00,SPAR - TRŽNICA TABOR,Kardeljeva c. 55,"{'lat': 46.542655, 'lng': 15.634329}",9.5,43,-2.5,6.7,0,0.1,985.6,20,14
 25,2024-04-22 13:00:00,SPAR - TRŽNICA TABOR,Kardeljeva c. 55,"{'lat': 46.542655, 'lng': 15.634329}",10.1,41,-2.6,6.3,0,0.1,984.8,20,12
+25,2024-04-22 15:00:00,SPAR - TRŽNICA TABOR,Kardeljeva c. 55,"{'lat': 46.542655, 'lng': 15.634329}",10.0,47,-0.8,6.1,1,0.1,984.4,20,16
