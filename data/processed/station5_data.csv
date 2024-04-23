@@ -222,3 +222,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 5,2024-04-23 10:00:00,MLADINSKA UL. - TRUBARJEVA UL.,Mladinska ulica 15,"{'lat': 46.56294, 'lng': 15.644185}",3.4,87,1.5,-0.2,100,0.8,981.7,16,8
 5,2024-04-23 11:00:00,MLADINSKA UL. - TRUBARJEVA UL.,Mladinska ulica 15,"{'lat': 46.56294, 'lng': 15.644185}",3.9,84,1.5,0.2,100,1.2,980.9,16,6
 5,2024-04-23 12:00:00,MLADINSKA UL. - TRUBARJEVA UL.,Mladinska ulica 15,"{'lat': 46.56294, 'lng': 15.644185}",4.3,83,1.7,0.7,88,1.0,980.8,16,11
+5,2024-04-23 13:00:00,MLADINSKA UL. - TRUBARJEVA UL.,Mladinska ulica 15,"{'lat': 46.56294, 'lng': 15.644185}",4.8,83,2.2,1.6,93,0.7,980.1,16,14
