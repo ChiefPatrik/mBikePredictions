@@ -226,3 +226,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 6,2024-04-23 14:00:00,POŠTA - SLOMŠKOV TRG,Slomškov trg 10,"{'lat': 46.558924, 'lng': 15.644443}",4.4,83,1.8,0.4,90,1.4,980.4,20,15
 6,2024-04-23 15:00:00,POŠTA - SLOMŠKOV TRG,Slomškov trg 10,"{'lat': 46.558924, 'lng': 15.644443}",4.9,81,2.0,1.4,83,0.2,979.9,20,17
 6,2024-04-23 16:00:00,POŠTA - SLOMŠKOV TRG,Slomškov trg 10,"{'lat': 46.558924, 'lng': 15.644443}",4.7,84,2.2,1.3,75,0.2,979.5,20,17
+6,2024-04-23 17:00:00,POŠTA - SLOMŠKOV TRG,Slomškov trg 10,"{'lat': 46.558924, 'lng': 15.644443}",4.7,82,1.8,0.8,68,0.8,979.0,20,18
