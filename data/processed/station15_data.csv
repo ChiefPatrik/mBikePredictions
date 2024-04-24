@@ -247,3 +247,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 15,2024-04-24 11:00:00,LJUBLJANSKA UL. - II. GIMNAZIJA,Ljubljanska ul. 30-25,"{'lat': 46.548853, 'lng': 15.645591}",6.9,78,3.3,4.3,100,0.1,974.6,20,16
 15,2024-04-24 12:00:00,LJUBLJANSKA UL. - II. GIMNAZIJA,Ljubljanska ul. 30-25,"{'lat': 46.548853, 'lng': 15.645591}",7.8,71,2.8,5.0,77,0.2,974.3,20,20
 15,2024-04-24 13:00:00,LJUBLJANSKA UL. - II. GIMNAZIJA,Ljubljanska ul. 30-25,"{'lat': 46.548853, 'lng': 15.645591}",8.6,66,2.6,5.9,72,0.3,973.9,20,20
+15,2024-04-24 14:00:00,LJUBLJANSKA UL. - II. GIMNAZIJA,Ljubljanska ul. 30-25,"{'lat': 46.548853, 'lng': 15.645591}",8.5,71,3.5,6.6,68,0.2,974.4,20,12
