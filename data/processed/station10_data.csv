@@ -258,3 +258,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 10,2024-04-25 00:00:00,TELEMACH - GLAVNI TRG - STARI PERON,Glavni trg 20,"{'lat': 46.557328, 'lng': 15.646833}",5.5,81,2.5,2.6,63,0.5,977.3,20,5
 10,2024-04-25 00:00:00,TELEMACH - GLAVNI TRG - STARI PERON,Glavni trg 20,"{'lat': 46.557328, 'lng': 15.646833}",5.7,80,2.5,2.9,63,0.0,977.0,20,5
 10,2024-04-25 01:00:00,TELEMACH - GLAVNI TRG - STARI PERON,Glavni trg 20,"{'lat': 46.557328, 'lng': 15.646833}",5.5,78,2.0,2.7,49,0.1,977.0,20,6
+10,2024-04-25 02:00:00,TELEMACH - GLAVNI TRG - STARI PERON,Glavni trg 20,"{'lat': 46.557328, 'lng': 15.646833}",5.0,84,2.5,2.8,100,0.0,977.0,20,6
