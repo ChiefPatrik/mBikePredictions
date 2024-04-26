@@ -295,3 +295,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 11,2024-04-26 11:00:00,PARTIZANSKA C. - CANKARJEVA UL.,Partizanska c. 13,"{'lat': 46.56056, 'lng': 15.652935}",10.9,64,4.4,8.8,0,0.0,979.6,20,18
 11,2024-04-26 12:00:00,PARTIZANSKA C. - CANKARJEVA UL.,Partizanska c. 13,"{'lat': 46.56056, 'lng': 15.652935}",12.0,59,4.2,9.6,0,0.0,979.4,20,16
 11,2024-04-26 13:00:00,PARTIZANSKA C. - CANKARJEVA UL.,Partizanska c. 13,"{'lat': 46.56056, 'lng': 15.652935}",13.6,50,3.4,12.2,0,0.0,978.6,20,14
+11,2024-04-26 14:00:00,PARTIZANSKA C. - CANKARJEVA UL.,Partizanska c. 13,"{'lat': 46.56056, 'lng': 15.652935}",13.8,50,3.6,10.8,0,0.0,978.4,20,16
