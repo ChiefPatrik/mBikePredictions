@@ -316,3 +316,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 18,2024-04-27 08:00:00,LIDL - KOROŠKA C.,Koroška cesta 173,"{'lat': 46.565603, 'lng': 15.623133}",6.7,75,2.6,4.5,0,0.0,981.6,20,16
 18,2024-04-27 09:00:00,LIDL - KOROŠKA C.,Koroška cesta 173,"{'lat': 46.565603, 'lng': 15.623133}",10.6,68,4.9,8.5,0,0.0,982.3,20,17
 18,2024-04-27 10:00:00,LIDL - KOROŠKA C.,Koroška cesta 173,"{'lat': 46.565603, 'lng': 15.623133}",13.7,62,6.5,11.9,0,0.0,982.3,20,19
+18,2024-04-27 11:00:00,LIDL - KOROŠKA C.,Koroška cesta 173,"{'lat': 46.565603, 'lng': 15.623133}",15.6,54,6.3,14.9,0,0.0,982.0,20,20
