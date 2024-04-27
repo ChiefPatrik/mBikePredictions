@@ -318,3 +318,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 12,2024-04-27 10:00:00,MLINSKA UL . - AVTOBUSNA POSTAJA,Mlinska ulica 24,"{'lat': 46.558534, 'lng': 15.654739}",12.9,64,6.3,10.5,0,0.0,983.4,20,4
 12,2024-04-27 11:00:00,MLINSKA UL . - AVTOBUSNA POSTAJA,Mlinska ulica 24,"{'lat': 46.558534, 'lng': 15.654739}",15.2,54,5.9,13.0,0,0.0,983.0,20,6
 12,2024-04-27 12:00:00,MLINSKA UL . - AVTOBUSNA POSTAJA,Mlinska ulica 24,"{'lat': 46.558534, 'lng': 15.654739}",17.2,48,6.1,15.1,0,0.0,983.0,20,5
+12,2024-04-27 13:00:00,MLINSKA UL . - AVTOBUSNA POSTAJA,Mlinska ulica 24,"{'lat': 46.558534, 'lng': 15.654739}",17.5,46,5.8,14.6,0,0.0,982.8,20,5
