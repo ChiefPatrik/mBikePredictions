@@ -328,3 +328,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 7,2024-04-27 20:00:00,PARTIZANSKA C. - TIC,Partizanska cesta 6a,"{'lat': 46.560227, 'lng': 15.650781}",14.7,60,7.0,12.4,0,0.0,983.3,20,18
 7,2024-04-27 21:00:00,PARTIZANSKA C. - TIC,Partizanska cesta 6a,"{'lat': 46.560227, 'lng': 15.650781}",13.4,61,6.0,11.2,0,0.0,983.9,20,17
 7,2024-04-28 00:00:00,PARTIZANSKA C. - TIC,Partizanska cesta 6a,"{'lat': 46.560227, 'lng': 15.650781}",10.5,82,7.6,8.9,0,0.0,984.3,20,17
+7,2024-04-28 00:00:00,PARTIZANSKA C. - TIC,Partizanska cesta 6a,"{'lat': 46.560227, 'lng': 15.650781}",10.7,83,7.9,9.2,0,0.0,984.6,20,17
