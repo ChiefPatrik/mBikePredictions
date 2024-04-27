@@ -320,3 +320,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 14,2024-04-27 12:00:00,ULICA MOŠE PIJADA - UKC,Ulica Moše Pijada 6,"{'lat': 46.552652, 'lng': 15.646023}",17.7,46,5.9,17.0,0,0.0,981.9,20,17
 14,2024-04-27 13:00:00,ULICA MOŠE PIJADA - UKC,Ulica Moše Pijada 6,"{'lat': 46.552652, 'lng': 15.646023}",18.7,41,5.1,15.8,0,0.0,981.6,20,17
 14,2024-04-27 14:00:00,ULICA MOŠE PIJADA - UKC,Ulica Moše Pijada 6,"{'lat': 46.552652, 'lng': 15.646023}",19.0,39,4.7,16.5,0,0.0,982.0,20,20
+14,2024-04-27 15:00:00,ULICA MOŠE PIJADA - UKC,Ulica Moše Pijada 6,"{'lat': 46.552652, 'lng': 15.646023}",19.3,39,5.0,16.5,1,0.0,981.6,20,20
