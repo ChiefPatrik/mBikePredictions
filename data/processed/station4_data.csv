@@ -324,3 +324,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 4,2024-04-27 16:00:00,STROSSMAYERJEVA UL. - TRŽNICA,Strossmayerjeva ulica 3,"{'lat': 46.558498, 'lng': 15.64146}",18.8,41,5.2,15.6,11,0.0,982.5,20,6
 4,2024-04-27 17:00:00,STROSSMAYERJEVA UL. - TRŽNICA,Strossmayerjeva ulica 3,"{'lat': 46.558498, 'lng': 15.64146}",18.8,38,4.2,15.4,13,0.0,983.1,20,5
 4,2024-04-27 18:00:00,STROSSMAYERJEVA UL. - TRŽNICA,Strossmayerjeva ulica 3,"{'lat': 46.558498, 'lng': 15.64146}",18.3,42,5.2,15.7,9,0.0,983.0,20,1
+4,2024-04-27 19:00:00,STROSSMAYERJEVA UL. - TRŽNICA,Strossmayerjeva ulica 3,"{'lat': 46.558498, 'lng': 15.64146}",17.1,47,5.7,15.4,4,0.0,983.2,20,2
