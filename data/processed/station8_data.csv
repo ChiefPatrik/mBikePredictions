@@ -371,3 +371,4 @@ number,datetime,name,address,coordinates,temperature,relative_humidity,dew_point
 8,2024-04-29 15:00:00,RAZLAGOVA UL. - OBČINA,Razlagova ulica 1,"{'lat': 46.56196, 'lng': 15.650235}",24.2,45,11.6,24.9,0,0.0,989.2,20,20
 8,2024-04-29 16:00:00,RAZLAGOVA UL. - OBČINA,Razlagova ulica 1,"{'lat': 46.56196, 'lng': 15.650235}",24.6,44,11.5,24.5,0,0.0,988.6,20,11
 8,2024-04-29 17:00:00,RAZLAGOVA UL. - OBČINA,Razlagova ulica 1,"{'lat': 46.56196, 'lng': 15.650235}",24.6,34,7.7,22.5,0,0.0,988.5,20,14
+8,2024-04-29 18:00:00,RAZLAGOVA UL. - OBČINA,Razlagova ulica 1,"{'lat': 46.56196, 'lng': 15.650235}",23.8,37,8.3,21.9,1,0.0,988.3,20,12
