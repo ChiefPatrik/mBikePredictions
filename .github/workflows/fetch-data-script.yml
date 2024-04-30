@@ -47,7 +47,7 @@ jobs:
             echo "Error executing test_station_api.py"
             exit 1
           fi
-          
+
   fetch_station_data:
     needs: test_station_api
     runs-on: ubuntu-latest
@@ -234,7 +234,7 @@ jobs:
         with:
           commit_message: Fetched weather data with GitHub actions
 
-  preprocess_station_data:
+  preprocess_weather_data:
       needs: [preprocess_station_data, fetch_weather_data]
       runs-on: ubuntu-latest
 
@@ -281,7 +281,7 @@ jobs:
           uses: stefanzweifel/git-auto-commit-action@v5
           with:
             commit_message: Processed weather data with GitHub actions
-  
+
   merge_processed_data:
     needs: [preprocess_station_data, preprocess_weather_data]
     runs-on: ubuntu-latest
