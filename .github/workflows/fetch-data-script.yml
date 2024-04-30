@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test_station_api:
+  test_api_endpoints:
     runs-on: ubuntu-latest
 
     permissions:
@@ -38,18 +38,19 @@ jobs:
         run: |
           poetry install
 
-      - name: Run test_station_api.py
+      - name: Test API endpoints
         run: |
           poetry run python tests/test_station_api.py
+          poetry run python tests/test_weather_api.py
           if [ $? -eq 0 ]; then
-            echo "test_station_api.py executed successfully."
+            echo "API tests executed successfully."
           else
-            echo "Error executing test_station_api.py"
+            echo "Error testing API endpoints"
             exit 1
           fi
 
   fetch_station_data:
-    needs: test_station_api
+    needs: test_api_endpoints
     runs-on: ubuntu-latest
 
     permissions:
@@ -81,6 +82,25 @@ jobs:
         run: |
           poetry install
 
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+        with:
+          version: '3.48.4'
+
+      - name: Setup Dagshub
+        run: |
+          poetry run dvc remote modify origin endpointurl https://dagshub.com/patrik.praprotnik/mBikePredictions.s3
+          poetry run dvc remote modify origin --local access_key_id ${{ secrets.ACCESS_KEY_ID }}
+          poetry run dvc remote modify origin --local secret_access_key ${{ secrets.SECRET_ACCESS_KEY }}
+
+      - name: Pull data
+        run: |
+          poetry run dvc pull -r origin
+
+      - name: Unprotect
+        run: |
+          poetry run dvc unprotect data
+
       - name: Run fetch_station_data.py
         run: |
           poetry run python src/data/fetch_station_data.py
@@ -90,11 +110,19 @@ jobs:
             echo "Error executing fetch_station_data.py"
             exit 1
           fi
-          
-      - name: Push fetched station data to GitHub
+
+      - name: Add data to DVC
+        run: |
+          poetry run dvc add data
+
+      - name: DVC push
+        run: |
+          poetry run dvc push -r origin    
+
+      - name: Push fetched station data to DagsHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Fetched station data with GitHub actions
+          commit_message: Update DVC data
 
   preprocess_station_data:
     needs: fetch_station_data
@@ -129,6 +157,25 @@ jobs:
         run: |
           poetry install
 
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+        with:
+          version: '3.48.4'
+
+      - name: Setup Dagshub
+        run: |
+          poetry run dvc remote modify origin endpointurl https://dagshub.com/patrik.praprotnik/mBikePredictions.s3
+          poetry run dvc remote modify origin --local access_key_id ${{ secrets.ACCESS_KEY_ID }}
+          poetry run dvc remote modify origin --local secret_access_key ${{ secrets.SECRET_ACCESS_KEY }}
+
+      - name: Pull data
+        run: |
+          poetry run dvc pull -r origin
+
+      - name: Unprotect
+        run: |
+          poetry run dvc unprotect data
+
       - name: Run preprocess_station_data.py
         run: |
           poetry run python src/data/preprocess_station_data.py
@@ -138,57 +185,22 @@ jobs:
             echo "Error executing preprocess_station_data.py"
             exit 1
           fi
-          
-      - name: Push preprocessed station data to GitHub
+
+      - name: Add data to DVC
+        run: |
+          poetry run dvc add data
+
+      - name: DVC push
+        run: |
+          poetry run dvc push -r origin
+
+      - name: Push preprocessed station data to DagsHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Processed station data with GitHub actions
-
-  test_weather_api:
-    needs: preprocess_station_data
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/pypoetry
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
-          restore-keys: |
-            ${{ runner.os }}-poetry-
-      
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.12
-
-      - name: Install Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          poetry --version
-
-      - name: Install dependencies
-        run: |
-          poetry install
-
-      - name: Run test_weather_api.py
-        run: |
-          poetry run python tests/test_weather_api.py
-          if [ $? -eq 0 ]; then
-            echo "test_weather_api.py executed successfully."
-          else
-            echo "Error executing test_weather_api.py"
-            exit 1
-          fi
+          commit_message: Update DVC data
 
   fetch_weather_data:
-    needs: test_weather_api
+    needs: preprocess_station_data
     runs-on: ubuntu-latest
 
     permissions:
@@ -220,6 +232,25 @@ jobs:
         run: |
           poetry install
 
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+        with:
+          version: '3.48.4'
+
+      - name: Setup Dagshub
+        run: |
+          poetry run dvc remote modify origin endpointurl https://dagshub.com/patrik.praprotnik/mBikePredictions.s3
+          poetry run dvc remote modify origin --local access_key_id ${{ secrets.ACCESS_KEY_ID }}
+          poetry run dvc remote modify origin --local secret_access_key ${{ secrets.SECRET_ACCESS_KEY }}
+
+      - name: Pull data
+        run: |
+          poetry run dvc pull -r origin
+
+      - name: Unprotect
+        run: |
+          poetry run dvc unprotect data
+
       - name: Run fetch_weather_data.py
         run: |
           poetry run python src/data/fetch_weather_data.py
@@ -229,11 +260,19 @@ jobs:
             echo "Error executing fetch_station_data.py"
             exit 1
           fi
-          
-      - name: Push fetched weather data to GitHub
+
+      - name: Add data to DVC
+        run: |
+          poetry run dvc add data
+
+      - name: DVC push
+        run: |
+          poetry run dvc push -r origin
+
+      - name: Push fetched weather data to DagsHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Fetched weather data with GitHub actions
+          commit_message: Update DVC data
 
   preprocess_weather_data:
       needs: fetch_weather_data
@@ -268,6 +307,25 @@ jobs:
           run: |
             poetry install
 
+        - name: Setup DVC
+          uses: iterative/setup-dvc@v1
+          with:
+            version: '3.48.4'
+
+        - name: Setup Dagshub
+          run: |
+            poetry run dvc remote modify origin endpointurl https://dagshub.com/patrik.praprotnik/mBikePredictions.s3
+            poetry run dvc remote modify origin --local access_key_id ${{ secrets.ACCESS_KEY_ID }}
+            poetry run dvc remote modify origin --local secret_access_key ${{ secrets.SECRET_ACCESS_KEY }}
+
+        - name: Pull data
+          run: |
+            poetry run dvc pull -r origin
+
+        - name: Unprotect
+          run: |
+            poetry run dvc unprotect data
+
         - name: Run preprocess_weather_data.py
           run: |
             poetry run python src/data/preprocess_weather_data.py
@@ -277,11 +335,19 @@ jobs:
               echo "Error executing preprocess_station_data.py"
               exit 1
             fi
-            
-        - name: Push preprocessed weather data to GitHub
+
+        - name: Add data to DVC
+          run: |
+            poetry run dvc add data
+
+        - name: DVC push
+          run: |
+            poetry run dvc push -r origin
+
+        - name: Push preprocessed weather data to DagsHub
           uses: stefanzweifel/git-auto-commit-action@v5
           with:
-            commit_message: Processed weather data with GitHub actions
+            commit_message: Update DVC data
 
   merge_processed_data:
     needs: [preprocess_station_data, preprocess_weather_data]
@@ -316,6 +382,25 @@ jobs:
         run: |
           poetry install
 
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+        with:
+          version: '3.48.4'
+
+      - name: Setup Dagshub
+        run: |
+          poetry run dvc remote modify origin endpointurl https://dagshub.com/patrik.praprotnik/mBikePredictions.s3
+          poetry run dvc remote modify origin --local access_key_id ${{ secrets.ACCESS_KEY_ID }}
+          poetry run dvc remote modify origin --local secret_access_key ${{ secrets.SECRET_ACCESS_KEY }}
+
+      - name: Pull data
+        run: |
+          poetry run dvc pull -r origin
+
+      - name: Unprotect
+        run: |
+          poetry run dvc unprotect data
+
       - name: Run merge_processed_data.py
         run: |
           poetry run python src/data/merge_processed_data.py
@@ -325,8 +410,16 @@ jobs:
             echo "Error executing preprocess_station_data.py"
             exit 1
           fi
-          
-      - name: Push merged data to GitHub
+
+      - name: Add data to DVC
+        run: |
+          poetry run dvc add data
+
+      - name: DVC push
+        run: |
+          poetry run dvc push -r origin
+
+      - name: Push merged data to DagsHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Merged data with GitHub actions
+          commit_message: Update DVC data
