@@ -29,41 +29,29 @@ def format_datetime(datetime_str):
     return formatted_datetime
 
 
-def save_station_data(station, weather, filename):
-    fieldnames = ['number', 
-                  'datetime',
-                  'name',
-                  'address',
-                  'coordinates', 
+def save_weather_data(weather, filename):
+    fieldnames = ['datetime',
                   'temperature', 
                   'relative_humidity', 
                   'dew_point', 
                   'apparent_temperature', 
                   'precipitation_probability', 
                   'rain', 
-                  'surface_pressure',
-                  'bike_stands', 
-                  'available_bike_stands'
+                  'surface_pressure'
                   ]
     filepath = os.path.join(processed_data_path, filename)
     with open(filepath, mode='a', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         #writer.writeheader()  # Header row with fieldnames
         writer.writerow({
-            'number': station['number'],
             'datetime': format_datetime(weather['datetime']),
-            'name': station['name'],
-            'address': station['address'],
-            'coordinates': station['position'],
             'temperature': weather['temperature_2m'],
             'relative_humidity': weather['relative_humidity_2m'],
             'dew_point': weather['dew_point_2m'],
             'apparent_temperature': weather['apparent_temperature'],
             'precipitation_probability': weather['precipitation_probability'],
             'rain': weather['rain'],
-            'surface_pressure': weather['surface_pressure'],
-            'bike_stands': station['bike_stands'],
-            'available_bike_stands': station['available_bike_stands']
+            'surface_pressure': weather['surface_pressure']
         })
 
 
@@ -82,12 +70,12 @@ def process_data(station_data, weather_data):
                 'rain': weather_entry['hourly']['rain'][current_time_index],
                 'surface_pressure': weather_entry['hourly']['surface_pressure'][current_time_index]
             }
-            filename = f"station{station['number']}_data.csv"
-            save_station_data(station, weather_attributes, filename)
+            filename = f"station{station['number']}_weather_data.csv"
+            save_weather_data(weather_attributes, filename)
         else:
             print(f"Weather data not found for station {station['number']}")
 
-    print("Data processed and saved to CSV files successfully!")
+    print("Weather data preprocessed and saved to CSV files successfully!")
 
 def main():
     station_json_filename = "raw_station_data.json"

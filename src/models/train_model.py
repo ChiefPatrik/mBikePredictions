@@ -13,7 +13,7 @@ from tensorflow.keras.layers import SimpleRNN, Dense
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-processed_data_dir = os.path.join(current_dir, '..', '..', 'data', 'processed')
+merged_data_dir = os.path.join(current_dir, '..', '..', 'data', 'merged')
 models_dir = os.path.join(current_dir, '..', '..', 'models')
 reports_dir = os.path.join(current_dir, '..', '..', 'reports')
 window_size = 30 
@@ -224,7 +224,7 @@ def save_data(station_number, model, available_bike_stands_scaler, features_scal
 
 def main():
     # Get a list of all CSV files in the directory
-    csv_files = glob.glob(os.path.join(processed_data_dir, 'station*_data.csv'))
+    csv_files = glob.glob(os.path.join(merged_data_dir, 'station*_data.csv'))
 
     # Select features for multivariate time series
     selected_features = [

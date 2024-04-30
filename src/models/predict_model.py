@@ -9,8 +9,8 @@ from tensorflow.keras.models import load_model
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 models_dir = os.path.join(current_dir, '..', '..', 'models')
-processed_data_dir = os.path.join(current_dir, '..', '..', 'data', 'processed')
-window_size = 30
+merged_data_dir = os.path.join(current_dir, '..', '..', 'data', 'merged')
+window_size = 30 
 time_interval = 7
 
 
@@ -106,7 +106,7 @@ def predict(station_number):
     features_scaler = joblib.load(os.path.join(models_dir, f'station{station_number}', 'features_scaler.pkl'))
 
     # Load existing station data
-    station_data = pd.read_csv(os.path.join(processed_data_dir, f'station{station_number}_data.csv'))
+    station_data = pd.read_csv(os.path.join(merged_data_dir, f'station{station_number}_data.csv'))
     
     # Fetch fresh weather data for given station
     first_row = station_data.iloc[1]

@@ -1,24 +1,10 @@
 import requests
 import json
 import os
-import subprocess
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.join(current_dir, '..', '..', 'data')
-
 raw_data_path = os.path.join(data_dir, 'raw')
-
-
-def fetch_station_data(contract, api_key):
-    url = f"https://api.jcdecaux.com/vls/v1/stations?contract={contract}&apiKey={api_key}"
-    try:
-        response = requests.get(url)
-        response.raise_for_status()  # Raise exception for bad status codes
-        data = response.json()
-        return data
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching bike station data: {e}")
-        return None
 
 
 def fetch_weather_data(station_data): 
@@ -43,27 +29,30 @@ def fetch_weather_data(station_data):
         print(f"Error fetching weather data: {e}")
         return None
     
-
 def save_to_json(data, filename):
     filepath = os.path.join(raw_data_path, filename)
     with open(filepath, mode='w', encoding='utf-8') as file:
-        json.dump(data, file, indent=4)
+        json.dump(data, file, indent=4)  
 
+def read_json(path, filename):
+    filepath = os.path.join(path, filename)
+    with open(filepath, mode='r', encoding='utf-8') as file:
+        data = json.load(file)
+    return data
 
 def main():
-    contract = "maribor" 
-    api_key = "5e150537116dbc1786ce5bec6975a8603286526b"  
-    station_data = fetch_station_data(contract, api_key)
+    station_json_filename = "raw_station_data.json"
+    station_data = read_json(raw_data_path, station_json_filename)
     
     if station_data:
         weather_data = fetch_weather_data(station_data)
-        save_to_json(station_data, "raw_station_data.json")
-        save_to_json(weather_data, "raw_weather_data.json")
-        print("Data fetched and saved successfully!")
-
-        #subprocess.run(["python", "process_data.py"])
+        if weather_data:
+            save_to_json(weather_data, "raw_weather_data.json")
+            print("Data fetched and saved successfully!")
+        else:
+            print("Failed to fetch weather data.")
     else:
-        print("Failed to fetch station data.")
+        print("Failed to read station data from file.")
 
 
 if __name__ == "__main__":

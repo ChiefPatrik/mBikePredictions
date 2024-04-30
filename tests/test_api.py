@@ -1,6 +1,5 @@
 import requests
 import random
-import datetime
 
 def generate_random_station_number():
     return {"data": [{"station_number": random.randint(1, 29)}]}

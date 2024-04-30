@@ -16,7 +16,7 @@ RUN poetry config virtualenvs.create false && poetry install --no-root
 # Copy the rest of the application code
 COPY . /app
 
-# Expose port 3000
+# Expose port 3001
 EXPOSE 3001
 
 # Command to run the application

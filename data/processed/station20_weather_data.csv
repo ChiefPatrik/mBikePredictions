@@ -1,0 +1,2 @@
+datetime,temperature,relative_humidity,dew_point,apparent_temperature,precipitation_probability,rain,surface_pressure
+2024-04-29 23:00:00,14.5,65,8.0,13.4,0,0.0,991.5
