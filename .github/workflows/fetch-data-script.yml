@@ -145,6 +145,7 @@ jobs:
           commit_message: Processed station data with GitHub actions
 
   test_weather_api:
+    needs: preprocess_station_data
     runs-on: ubuntu-latest
 
     permissions:
@@ -235,7 +236,7 @@ jobs:
           commit_message: Fetched weather data with GitHub actions
 
   preprocess_weather_data:
-      needs: [preprocess_station_data, fetch_weather_data]
+      needs: fetch_weather_data
       runs-on: ubuntu-latest
 
       permissions:
