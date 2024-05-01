@@ -59,7 +59,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        with:
+          ref: 'main'
+        
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
@@ -134,7 +136,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        with:
+          ref: 'main'
+          
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
@@ -209,6 +213,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: 'main'        
 
       - name: Cache dependencies
         uses: actions/cache@v2
@@ -275,79 +281,81 @@ jobs:
           commit_message: Update DVC data
 
   preprocess_weather_data:
-      needs: fetch_weather_data
-      runs-on: ubuntu-latest
+    needs: fetch_weather_data
+    runs-on: ubuntu-latest
 
-      permissions:
-        contents: write
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: 'main'
         
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
 
-        - name: Cache dependencies
-          uses: actions/cache@v2
-          with:
-            path: ~/.cache/pypoetry
-            key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
-            restore-keys: |
-              ${{ runner.os }}-poetry-
-        
-        - name: Set up Python
-          uses: actions/setup-python@v2
-          with:
-            python-version: 3.12
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          poetry --version
 
-        - name: Install Poetry
-          run: |
-            curl -sSL https://install.python-poetry.org | python3 -
-            poetry --version
+      - name: Install dependencies
+        run: |
+          poetry install
 
-        - name: Install dependencies
-          run: |
-            poetry install
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+        with:
+          version: '3.48.4'
 
-        - name: Setup DVC
-          uses: iterative/setup-dvc@v1
-          with:
-            version: '3.48.4'
+      - name: Setup Dagshub
+        run: |
+          poetry run dvc remote modify origin endpointurl https://dagshub.com/patrik.praprotnik/mBikePredictions.s3
+          poetry run dvc remote modify origin --local access_key_id ${{ secrets.ACCESS_KEY_ID }}
+          poetry run dvc remote modify origin --local secret_access_key ${{ secrets.SECRET_ACCESS_KEY }}
 
-        - name: Setup Dagshub
-          run: |
-            poetry run dvc remote modify origin endpointurl https://dagshub.com/patrik.praprotnik/mBikePredictions.s3
-            poetry run dvc remote modify origin --local access_key_id ${{ secrets.ACCESS_KEY_ID }}
-            poetry run dvc remote modify origin --local secret_access_key ${{ secrets.SECRET_ACCESS_KEY }}
+      - name: Pull data
+        run: |
+          poetry run dvc pull -r origin
 
-        - name: Pull data
-          run: |
-            poetry run dvc pull -r origin
+      - name: Unprotect
+        run: |
+          poetry run dvc unprotect data
 
-        - name: Unprotect
-          run: |
-            poetry run dvc unprotect data
+      - name: Run preprocess_weather_data.py
+        run: |
+          poetry run python src/data/preprocess_weather_data.py
+          if [ $? -eq 0 ]; then
+            echo "preprocess_weather_data.py executed successfully."
+          else
+            echo "Error executing preprocess_station_data.py"
+            exit 1
+          fi
 
-        - name: Run preprocess_weather_data.py
-          run: |
-            poetry run python src/data/preprocess_weather_data.py
-            if [ $? -eq 0 ]; then
-              echo "preprocess_weather_data.py executed successfully."
-            else
-              echo "Error executing preprocess_station_data.py"
-              exit 1
-            fi
+      - name: Add data to DVC
+        run: |
+          poetry run dvc add data
 
-        - name: Add data to DVC
-          run: |
-            poetry run dvc add data
+      - name: DVC push
+        run: |
+          poetry run dvc push -r origin
 
-        - name: DVC push
-          run: |
-            poetry run dvc push -r origin
-
-        - name: Push preprocessed weather data to DagsHub
-          uses: stefanzweifel/git-auto-commit-action@v5
-          with:
-            commit_message: Update DVC data
+      - name: Push preprocessed weather data to DagsHub
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Update DVC data
 
   merge_processed_data:
     needs: [preprocess_station_data, preprocess_weather_data]
@@ -359,7 +367,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        with:
+          ref: 'main'
+          
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
