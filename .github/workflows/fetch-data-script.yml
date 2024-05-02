@@ -124,7 +124,7 @@ jobs:
       - name: Push fetched station data to DagsHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Update DVC data
+          commit_message: Update DVC data (fetch station data)
 
   preprocess_station_data:
     needs: fetch_station_data
@@ -201,7 +201,7 @@ jobs:
       - name: Push preprocessed station data to DagsHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Update DVC data
+          commit_message: Update DVC data (preprocess station data)
 
   fetch_weather_data:
     needs: preprocess_station_data
@@ -278,7 +278,7 @@ jobs:
       - name: Push fetched weather data to DagsHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Update DVC data
+          commit_message: Update DVC data (fetch weather data)
 
   preprocess_weather_data:
     needs: fetch_weather_data
@@ -355,7 +355,7 @@ jobs:
       - name: Push preprocessed weather data to DagsHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Update DVC data
+          commit_message: Update DVC data (preprocess weather data)
 
   merge_processed_data:
     needs: [preprocess_station_data, preprocess_weather_data]
@@ -432,4 +432,4 @@ jobs:
       - name: Push merged data to DagsHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Update DVC data
+          commit_message: Update DVC data (merge processed data)

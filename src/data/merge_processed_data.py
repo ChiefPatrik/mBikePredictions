@@ -39,7 +39,8 @@ def merge_data(station_number):
                              'available_bike_stands'
                              ]
         merged_writer = csv.DictWriter(merged_file, fieldnames=merged_fieldnames)
-        #merged_writer.writeheader()
+        if not os.path.isfile(merged_file):     # Header row with fieldnames
+            merged_writer.writeheader()
         
         last_station_row = None
         for station_row in station_reader:
