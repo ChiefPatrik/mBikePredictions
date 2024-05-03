@@ -27,8 +27,7 @@ def save_station_data(station, filename):
     filepath = os.path.join(processed_data_path, filename)
     with open(filepath, mode='a', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
-        if not os.path.isfile(file):    # Header row with fieldnames
-            writer.writeheader()
+        #writer.writeheader()    # Header row with fieldnames        
         writer.writerow({
             'number': station['number'],
             'name': station['name'],
