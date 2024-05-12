@@ -584,11 +584,11 @@ jobs:
 
       - name: Test data
         run: |
-          poetry run python src/data/data_test.py
+          poetry run python src/data/data_test_evidently.py
           if [ $? -eq 0 ]; then
-            echo "test_data.py executed successfully."
+            echo "data_test_evidently.py executed successfully."
           else
-            echo "Error executing test_data.py"
+            echo "Error executing data_test_evidently.py"
             exit 1
           fi
 
