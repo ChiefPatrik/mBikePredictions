@@ -4,19 +4,31 @@ import glob
 import joblib
 import re
 import os
+import mlflow
+import dagshub.auth
+import dagshub
+from dotenv import load_dotenv
 import matplotlib.pyplot as plt
+
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, explained_variance_score
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import SimpleRNN, Dense
 
-
 current_dir = os.path.dirname(os.path.abspath(__file__))
 merged_data_dir = os.path.join(current_dir, '..', '..', 'data', 'merged')
 models_dir = os.path.join(current_dir, '..', '..', 'models')
 reports_dir = os.path.join(current_dir, '..', '..', 'reports')
-window_size = 30 
+window_size = 30
+
+# Setup MLflow and Dagshub
+load_dotenv()
+mlflow_username = os.getenv("MLFLOW_TRACKING_USERNAME")
+mlflow_password = os.getenv("MLFLOW_TRACKING_PASSWORD")
+dagshub.auth.add_app_token(token=mlflow_password)
+dagshub.init(repo_owner=mlflow_username, repo_name='mBikePredictions', mlflow=True)
+mlflow.set_tracking_uri('https://dagshub.com/patrik.praprotnik/mBikePredictions.mlflow')
 
 # ====================
 # IZRISOVANJE GRAFOV
@@ -108,17 +120,10 @@ def create_time_series_data(time_series, window_size):
     return X, y[:, 0]
 
 # Function for preparing train and test data for multivariate time series
-def prepare_data_for_multivariate_time_series(bike_data, selected_features):
-    df_selected_features = bike_data[selected_features].values
-      
-    total_size = len(df_selected_features)          # Total size of dataframe
-    test_size = (total_size // 3) + window_size     # 33% of total_size + window_size
-    train_size = total_size - test_size
-
-    train_data, test_data = df_selected_features[:train_size], df_selected_features[train_size:]
-
-    # print('Train data length:', len(train_data))  
-    # print('Test data length:', len(test_data))    
+def prepare_data_for_multivariate_time_series(train_data, test_data, selected_features):
+    # Convert pandas dataframe to numpy array
+    train_data = train_data[selected_features].values
+    test_data = test_data[selected_features].values
 
     # Split dataset in 2 parts - with and without target feature
     available_bike_stands_train_data = train_data[:,0]
@@ -134,9 +139,9 @@ def prepare_data_for_multivariate_time_series(bike_data, selected_features):
 
     features_scaler = MinMaxScaler()
     scaled_other_train_data = features_scaler.fit_transform(other_train_data)
-    scaled_other_test_data = features_scaler.fit_transform(other_test_data)
+    scaled_other_test_data = features_scaler.transform(other_test_data)
 
-    # Combine all traning data
+    # Combine all training data
     train_data = np.column_stack([
         scaled_ABS_train_data,
         scaled_other_train_data
@@ -152,15 +157,9 @@ def prepare_data_for_multivariate_time_series(bike_data, selected_features):
     X_train, y_train = create_time_series_data(train_data, window_size)
     X_test, y_test = create_time_series_data(test_data, window_size)
 
-    # print('Train data shape: X_train:', X_train.shape, ', y_train:', y_train.shape)
-    # print('Test data shape: X_test:', X_test.shape, ', y_test:', y_test.shape)
-
     # Transpose X_train and X_test
     X_train = np.transpose(X_train, (0, 2, 1))  # Transpose axes 1 and 2
     X_test = np.transpose(X_test, (0, 2, 1))    # Transpose axes 1 and 2
-
-    # print('Reshaped X_train:', X_train.shape)
-    # print('Reshaped X_test:', X_test.shape)
 
     return X_train, y_train, X_test, y_test, available_bike_stands_scaler, features_scaler
 
@@ -223,8 +222,13 @@ def save_data(station_number, model, available_bike_stands_scaler, features_scal
 
 
 def main():
-    # Get a list of all CSV files in the directory
-    csv_files = glob.glob(os.path.join(merged_data_dir, 'station*_data.csv'))
+    # Get all train and test files
+    train_files = glob.glob(os.path.join(merged_data_dir,'station*_train.csv'))
+    test_files = glob.glob(os.path.join(merged_data_dir,'station*_test.csv'))
+
+    # Ensure that train_files and test_files have the same length and are sorted in the same order
+    train_files.sort()
+    test_files.sort()
 
     # Select features for multivariate time series
     selected_features = [
@@ -238,43 +242,51 @@ def main():
         'surface_pressure',
         'bike_stands'
     ]
-    
-    for file in csv_files:
-        bike_data = pd.read_csv(file)
-        station_number = int(re.search('station(\d+)_data.csv', file).group(1))
 
-        bike_data['datetime'] = pd.to_datetime(bike_data['datetime'])
-        bike_data = bike_data.sort_values(by='datetime')
-        bike_data = bike_data[
-            ['datetime'] +
-            ['available_bike_stands',
-            'temperature',
-            'relative_humidity',
-            'dew_point',
-            'apparent_temperature',
-            'precipitation_probability',
-            'rain',
-            'surface_pressure',
-            'bike_stands']
-        ]
+    for train_file, test_file in zip(train_files, test_files):
+        station_number = int(re.search('station(\d+)_train.csv', train_file).group(1))
+        experiment_name = f"station{station_number}_train_run"
+        mlflow.set_experiment(experiment_name)
 
-        if bike_data.isnull().any().any():
-            bike_data = fill_missing_values(bike_data)
+        with mlflow.start_run(run_name=experiment_name):
+            mlflow.autolog()
 
-        X_train, y_train, X_test, y_test, available_bike_stands_scaler, features_scaler = prepare_data_for_multivariate_time_series(bike_data, selected_features)
-        
-        input_shape = (X_train.shape[1], X_train.shape[2])
-        #print("Input shape: ", input_shape)
-        rnn_model = build_model(input_shape)
-        rnn_history = rnn_model.fit(X_train, y_train, epochs=30, validation_split=0.2)
-        mse, mae, ev, predictions_inv = evaluate_model(available_bike_stands_scaler, rnn_model, X_test, y_test)
+            train_data = pd.read_csv(train_file)
+            test_data = pd.read_csv(test_file)
+            print(f"Training model for station {station_number} ...")
 
-        # plot_learning_history(rnn_history)
-        # plot_time_series_predictions(bike_data, predictions_inv, mse, mae, ev)
-        # plot_last_n_values(bike_data, predictions_inv, 10, mse, mae, ev)
+            # Convert 'datetime' column to datetime and sort the data
+            train_data['datetime'] = pd.to_datetime(train_data['datetime'])
+            train_data = train_data.sort_values(by='datetime')
 
-        save_data(station_number, rnn_model, available_bike_stands_scaler, features_scaler, rnn_history, mse, mae, ev)
+            test_data['datetime'] = pd.to_datetime(test_data['datetime'])
+            test_data = test_data.sort_values(by='datetime')
+            
+            train_data = train_data[['datetime'] + selected_features]
+            test_data = test_data[['datetime'] + selected_features]
 
+            # Fill missing values
+            if train_data.isnull().any().any():
+                train_data = fill_missing_values(train_data)
+            if test_data.isnull().any().any():
+                test_data = fill_missing_values(test_data)
+
+            X_train, y_train, X_test, y_test, available_bike_stands_scaler, features_scaler = prepare_data_for_multivariate_time_series(train_data, test_data, selected_features)
+            
+            input_shape = (X_train.shape[1], X_train.shape[2])
+            #print("Input shape: ", input_shape)
+            rnn_model = build_model(input_shape)
+            
+            rnn_history = rnn_model.fit(X_train, y_train, epochs=30, validation_split=0.2)
+            mse, mae, ev, predictions_inv = evaluate_model(available_bike_stands_scaler, rnn_model, X_test, y_test)
+
+            # plot_learning_history(rnn_history)
+            # plot_time_series_predictions(bike_data, predictions_inv, mse, mae, ev)
+            # plot_last_n_values(bike_data, predictions_inv, 10, mse, mae, ev)
+
+            save_data(station_number, rnn_model, available_bike_stands_scaler, features_scaler, rnn_history, mse, mae, ev)
+
+        mlflow.end_run()
 
 if __name__ == "__main__":
     main()
