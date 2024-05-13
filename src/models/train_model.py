@@ -5,7 +5,7 @@ import joblib
 import re
 import os
 import mlflow
-import dagshub.auth
+#import dagshub.auth
 import dagshub
 from dotenv import load_dotenv
 import matplotlib.pyplot as plt
@@ -180,18 +180,27 @@ def build_model(inputShape):
     model.compile(optimizer='adam', loss='mean_squared_error')
     return model
 
-def evaluate_model(available_bike_stands_scaler, model, X_test, y_test):
-    # Predicting on test data
-    y_pred = model.predict(X_test)
+def evaluate_model(station_number, available_bike_stands_scaler, model, X_test, y_test):
+    mlflow.set_experiment(f"station{station_number}_test_exp")
+    with mlflow.start_run(run_name=f"station{station_number}_test_run"):
+        mlflow.autolog()
+        # Predicting on test data
+        y_pred = model.predict(X_test)
 
-    # Inverse transformation of predicted and actual values
-    y_pred_inv = available_bike_stands_scaler.inverse_transform(y_pred)
-    y_test_inv = available_bike_stands_scaler.inverse_transform(y_test.reshape(-1, 1))
+        # Inverse transformation of predicted and actual values
+        y_pred_inv = available_bike_stands_scaler.inverse_transform(y_pred)
+        y_test_inv = available_bike_stands_scaler.inverse_transform(y_test.reshape(-1, 1))
 
-    # Calculating metrics
-    mse = mean_squared_error(y_test_inv, y_pred_inv)
-    mae = mean_absolute_error(y_test_inv, y_pred_inv)
-    ev = explained_variance_score(y_test_inv, y_pred_inv)
+        # Calculating metrics
+        mse = mean_squared_error(y_test_inv, y_pred_inv)
+        mae = mean_absolute_error(y_test_inv, y_pred_inv)
+        ev = explained_variance_score(y_test_inv, y_pred_inv)
+
+        mlflow.log_metric("MAE", mae)
+        mlflow.log_metric("MSE", mse)
+        mlflow.log_metric("EVS", ev)
+
+    mlflow.end_run()
     return mse, mae, ev, y_pred_inv
 
 def save_data(station_number, model, available_bike_stands_scaler, features_scaler, history, mse, mae, ev):
@@ -245,10 +254,10 @@ def main():
 
     for train_file, test_file in zip(train_files, test_files):
         station_number = int(re.search('station(\d+)_train.csv', train_file).group(1))
-        experiment_name = f"station{station_number}_train_run"
+        experiment_name = f"station{station_number}_train_exp"
         mlflow.set_experiment(experiment_name)
 
-        with mlflow.start_run(run_name=experiment_name):
+        with mlflow.start_run(run_name=f"station{station_number}_train_run"):
             mlflow.autolog()
 
             train_data = pd.read_csv(train_file)
@@ -278,15 +287,16 @@ def main():
             rnn_model = build_model(input_shape)
             
             rnn_history = rnn_model.fit(X_train, y_train, epochs=30, validation_split=0.2)
-            mse, mae, ev, predictions_inv = evaluate_model(available_bike_stands_scaler, rnn_model, X_test, y_test)
-
-            # plot_learning_history(rnn_history)
-            # plot_time_series_predictions(bike_data, predictions_inv, mse, mae, ev)
-            # plot_last_n_values(bike_data, predictions_inv, 10, mse, mae, ev)
-
-            save_data(station_number, rnn_model, available_bike_stands_scaler, features_scaler, rnn_history, mse, mae, ev)
-
         mlflow.end_run()
+
+        mse, mae, ev, predictions_inv = evaluate_model(station_number, available_bike_stands_scaler, rnn_model, X_test, y_test)
+
+        # plot_learning_history(rnn_history)
+        # plot_time_series_predictions(bike_data, predictions_inv, mse, mae, ev)
+        # plot_last_n_values(bike_data, predictions_inv, 10, mse, mae, ev)
+
+        save_data(station_number, rnn_model, available_bike_stands_scaler, features_scaler, rnn_history, mse, mae, ev)
+
 
 if __name__ == "__main__":
     main()
