@@ -22,9 +22,10 @@ window_size = 30
 load_dotenv()
 mlflow_username = os.getenv("MLFLOW_TRACKING_USERNAME")
 mlflow_password = os.getenv("MLFLOW_TRACKING_PASSWORD")
+mlflow_uri = os.getenv("MLFLOW_TRACKING_URI")
 dagshub.auth.add_app_token(token=mlflow_password)
 dagshub.init(repo_owner=mlflow_username, repo_name='mBikePredictions', mlflow=True)
-mlflow.set_tracking_uri('https://dagshub.com/patrik.praprotnik/mBikePredictions.mlflow')
+mlflow.set_tracking_uri(mlflow_uri)
 
 
 # ====================
