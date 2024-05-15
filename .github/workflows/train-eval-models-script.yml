@@ -64,7 +64,7 @@ jobs:
 
       - name: Run train_model.py
         run: |
-          python src/models/train_model.py
+          poetry run python src/models/train_model.py
           if [ $? -eq 0 ]; then
             echo "train_model.py executed successfully."
           else
@@ -74,7 +74,7 @@ jobs:
 
       - name: Run evaluate_model.py
         run: |
-          python src/models/evaluate_model.py
+          poetry run python src/models/evaluate_model.py
           if [ $? -eq 0 ]; then
             echo "evaluate_model.py executed successfully."
           else
