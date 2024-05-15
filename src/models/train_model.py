@@ -166,7 +166,7 @@ def build_model(inputShape):
     model.compile(optimizer='adam', loss='mean_squared_error')
     return model
 
-def save_data(station_number, model, available_bike_stands_scaler, features_scaler, learnHistory, mse, mae, ev):
+def save_data(station_number, model, available_bike_stands_scaler, features_scaler, learnHistory):
     dir_name = f'station{station_number}'
     model_name = f'station{station_number}_model.h5'
     train_metrics_name = f'station{station_number}_train_metrics.txt'
