@@ -4,21 +4,25 @@ import glob
 import joblib
 import mlflow
 import dagshub
-import pandas as pd
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
-from dotenv import load_dotenv
 
-from sklearn.preprocessing import MinMaxScaler
+from dotenv import load_dotenv
+from mlflow import MlflowClient
+from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import SimpleRNN, Dense
+
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 merged_data_dir = os.path.join(current_dir, '..', '..', 'data', 'merged')
 models_dir = os.path.join(current_dir, '..', '..', 'models')
 reports_dir = os.path.join(current_dir, '..', '..', 'reports')
 window_size = 30
+
 
 # Setup MLflow and Dagshub
 load_dotenv()
@@ -32,7 +36,6 @@ mlflow.set_tracking_uri(mlflow_uri)
 # ====================
 # IZRISOVANJE GRAFOV
 # ====================
-
 def plot_time_series(bike_data, selected_features):
     for feature in selected_features:
         plt.figure(figsize=(15, 6))
@@ -76,10 +79,15 @@ def plot_last_n_values(bike_data, predictions, n, mae, mse, evs):
 # ====================
 # OBDELAVA PODATKOV
 # ====================
-
+# Function for filling missing values in the dataset
 def fill_missing_values(bike_data):
     print("Features with missing values BEFORE:\n", bike_data.isnull().any(), "\n")
-    
+
+    pipeline = Pipeline([
+        ('scaler', StandardScaler()),
+        ('model', RandomForestRegressor())
+    ])
+
     # Split the dataset into two parts: one with missing values and one without
     data_with_missing = bike_data[bike_data.isnull().any(axis=1)]
     data_without_missing = bike_data.dropna()
@@ -91,19 +99,20 @@ def fill_missing_values(bike_data):
         X_train = data_without_missing[columns_without_missing]
         y_train = data_without_missing[column]
 
-        # RandomForestRegressor had best results in the past
-        model = RandomForestRegressor(random_state=1234)
-        model.fit(X_train, y_train)
+        # model = RandomForestRegressor(random_state=1234)
+        # model.fit(X_train, y_train)
+        pipeline.fit(X_train, y_train)
 
         # Use the trained model to predict missing values
         X_missing = data_with_missing[columns_without_missing]
-        predicted_values = model.predict(X_missing)
+        #predicted_values = model.predict(X_missing)
+        predicted_values = pipeline.predict(X_missing)
 
         # Fill in missing values in the original dataset
         bike_data.loc[bike_data.index.isin(data_with_missing.index), column] = predicted_values
 
     print("Features with missing values AFTER:\n", bike_data.isnull().any(), "\n")
-    return bike_data
+    return bike_data, pipeline
 
 # Function for creating parts / "choppings" of time series
 def create_time_series_data(time_series, window_size):
@@ -149,24 +158,29 @@ def prepare_data_for_multivariate_time_series(train_data, selected_features):
 
     return X_train, y_train, available_bike_stands_scaler, features_scaler
 
+# Function for processing 'datetime', filling missing values and preparing data for multivariate time series
+def process_data(train_data, selected_features):
+    # Convert 'datetime' column to datetime and sort the data
+    train_data['datetime'] = pd.to_datetime(train_data['datetime'])
+    train_data = train_data.sort_values(by='datetime')
+    train_data = train_data[['datetime'] + selected_features]
 
-# ========================================
-# IZGRADNJA IN UČENJE NAPOVEDNEGA MODELA
-# ========================================
+    # Fill missing values
+    if train_data.isnull().any().any():
+        train_data, pipeline = fill_missing_values(train_data)
 
-def build_model(inputShape):
-    model = Sequential()
+    # Split the dataset into training and testing parts
+    X_train, y_train, available_bike_stands_scaler, features_scaler = prepare_data_for_multivariate_time_series(train_data, selected_features) 	
+    input_shape = (X_train.shape[1], X_train.shape[2])
 
-    model.add(SimpleRNN(64, activation='relu', input_shape=inputShape, return_sequences=True))
-    model.add(SimpleRNN(64, activation='relu'))
+    return X_train, y_train, available_bike_stands_scaler, features_scaler, input_shape
 
-    model.add(Dense(16, activation='relu'))
-    model.add(Dense(1))
 
-    model.compile(optimizer='adam', loss='mean_squared_error')
-    return model
-
-def save_data(station_number, model, available_bike_stands_scaler, features_scaler, learnHistory):
+# ========================
+# SHRANJEVANJE VREDNOSTI
+# ========================
+# Function for saving model, scalers and train metrics locally
+def save_data(station_number, model, available_bike_stands_scaler, features_scaler, learnHistory): 
     dir_name = f'station{station_number}'
     model_name = f'station{station_number}_model.h5'
     train_metrics_name = f'station{station_number}_train_metrics.txt'
@@ -182,18 +196,65 @@ def save_data(station_number, model, available_bike_stands_scaler, features_scal
     # Save train metrics
     dir_path = os.path.join(reports_dir, dir_name)
     os.makedirs(dir_path, exist_ok=True)
-    with open(os.path.join(dir_path, train_metrics_name), "a") as file:    
+    with open(os.path.join(dir_path, train_metrics_name), "a") as file:
         file.write(f"Loss: {learnHistory.history['loss']} \nVal_loss: {learnHistory.history['val_loss']}\n\n")
     print(f"Train metrics for model {station_number} saved!")
 
+# Function for saving scalers to MLflow
+def mlflow_save_scaler(client, scaler_name, scaler, station_number, stage_param="Staging"):
+    metadata = {
+        "station_number": station_number,
+        "scaler_name": scaler_name,
+        "expected_features": scaler.n_features_in_,
+        "feature_range": scaler.feature_range,
+    }
+
+    scaler = mlflow.sklearn.log_model(
+        sk_model=scaler,
+        artifact_path=f"models/{station_number}/{scaler_name}",
+        registered_model_name=f"{scaler_name}={station_number}",
+        metadata=metadata,
+    )
+
+    scaler_version = client.create_model_version(
+        name=f"{scaler_name}={station_number}",
+        source=scaler.model_uri,
+        run_id=scaler.run_id
+    )
+
+    client.transition_model_version_stage(
+        name=f"{scaler_name}={station_number}",
+        version=scaler_version.version,
+        stage=stage_param,
+    )
+
+
+# ========================================
+# IZGRADNJA IN UČENJE NAPOVEDNEGA MODELA
+# ========================================
+def build_model(inputShape):
+    model = Sequential()
+
+    model.add(SimpleRNN(64, activation='relu', input_shape=inputShape, return_sequences=True))
+    model.add(SimpleRNN(64, activation='relu'))
+
+    model.add(Dense(16, activation='relu'))
+    model.add(Dense(1))
+
+    model.compile(optimizer='adam', loss='mean_squared_error')
+    return model
+
+def get_metric_from_run(client, run_id, metric_name):
+    metric = client.get_metric_history(run_id, metric_name)
+    return metric[-1].value if metric else None
 
 
 def main():
     # Get all train files
     train_files = glob.glob(os.path.join(merged_data_dir,'station*_train.csv'))
 
-    # Ensure that train_files are sorted in the same order
     train_files.sort()
+    train_files = train_files[:5]
 
     # Select features for multivariate time series
     selected_features = [
@@ -208,6 +269,8 @@ def main():
         'bike_stands'
     ]
 
+    client = MlflowClient()
+
     for train_file in train_files:
         station_number = int(re.search('station(\d+)_train.csv', train_file).group(1))
         experiment_name = f"station{station_number}_train_exp"
@@ -217,34 +280,89 @@ def main():
             mlflow.autolog()
 
             train_data = pd.read_csv(train_file)
-            print(f"Training model for station {station_number} ...")
+            print(f"\nTraining model for station {station_number} ...")
 
-            # Convert 'datetime' column to datetime and sort the data
-            train_data['datetime'] = pd.to_datetime(train_data['datetime'])
-            train_data = train_data.sort_values(by='datetime')
-            
-            train_data = train_data[['datetime'] + selected_features]
+            X_train, y_train, available_bike_stands_scaler, features_scaler, input_shape = process_data(train_data, selected_features)
 
-            # Fill missing values
-            # if train_data.isnull().any().any():
-            #     train_data = fill_missing_values(train_data)
-            # if test_data.isnull().any().any():
-            #     test_data = fill_missing_values(test_data)
-
-            X_train, y_train, available_bike_stands_scaler, features_scaler = prepare_data_for_multivariate_time_series(train_data, selected_features)
-            
-            input_shape = (X_train.shape[1], X_train.shape[2])
-            #print("Input shape: ", input_shape)
+            # Build and train the model
             rnn_model = build_model(input_shape)
-            
             rnn_history = rnn_model.fit(X_train, y_train, epochs=30, validation_split=0.2)
+
+            # Log train metrics
+            for i in range(len(rnn_history.history['loss'])):
+                mlflow.log_metric("loss", rnn_history.history['loss'][i], step=i)
+                mlflow.log_metric("val_loss", rnn_history.history['val_loss'][i], step=i)
+
+            # Log the model
+            model_name = f"station{station_number}_model"
+            mlflow.sklearn.log_model(rnn_model, model_name)
+
+            # Register the model to the registry
+            run_id = mlflow.active_run().info.run_id
+            model_uri = f"runs:/{run_id}/{model_name}"
+            registered_model = mlflow.register_model(model_uri=model_uri, name=model_name)
+
+            # Get the last production model version
+            try:
+                model_versions = client.get_latest_versions(model_name, stages=["Production"])
+                if model_versions:
+                    last_production_version = model_versions[0]
+                    last_production_run_id = last_production_version.run_id
+
+                    # Retrieve metrics of the last production model
+                    production_val_loss = get_metric_from_run(client, last_production_run_id, "val_loss")
+
+                    # Retrieve metrics of the current model
+                    current_val_loss = get_metric_from_run(client, run_id, "val_loss")
+
+                    print(f"Current model val_loss: {current_val_loss}")
+                    print(f"Production model val_loss: {production_val_loss}")
+
+                    if current_val_loss < production_val_loss:
+                        print("Current model is better. Transitioning it to production.")
+                        client.transition_model_version_stage(
+                            name=model_name,
+                            version=registered_model.version,
+                            stage="Production"
+                        )
+                        mlflow_save_scaler(client, "ABS_scaler", available_bike_stands_scaler, station_number, "Production")
+                        mlflow_save_scaler(client, "features_scaler", features_scaler, station_number, "Production")
+                    else:
+                        print("Current model is not better than the production model. Transitioning to staging.")
+                        client.transition_model_version_stage(
+                            name=model_name,
+                            version=registered_model.version,
+                            stage="Staging"
+                        )
+                        mlflow_save_scaler(client, "ABS_scaler", available_bike_stands_scaler, station_number, "Staging")
+                        mlflow_save_scaler(client, "features_scaler", features_scaler, station_number, "Staging")
+                else:
+                    print("No production model found. Transitioning current model to production.")
+                    client.transition_model_version_stage(
+                        name=model_name,
+                        version=registered_model.version,
+                        stage="Production"
+                    )
+                    mlflow_save_scaler(client, "ABS_scaler", available_bike_stands_scaler, station_number, "Production")
+                    mlflow_save_scaler(client, "features_scaler", features_scaler, station_number, "Production")
+            except Exception as e:
+                print(f"Error while comparing models: {e}")
+                print("Transitioning current model to production as the first model.")
+                client.transition_model_version_stage(
+                    name=model_name,
+                    version=registered_model.version,
+                    stage="Staging"
+                )
+                mlflow_save_scaler(client, "ABS_scaler", available_bike_stands_scaler, station_number, "Staging")
+                mlflow_save_scaler(client, "features_scaler", features_scaler, station_number, "Staging")
+        
         mlflow.end_run()
 
         # plot_learning_history(rnn_history)
         # plot_time_series_predictions(bike_data, predictions_inv, mse, mae, ev)
         # plot_last_n_values(bike_data, predictions_inv, 10, mse, mae, ev)
 
-        save_data(station_number, rnn_model, available_bike_stands_scaler, features_scaler, rnn_history)
+        save_data(station_number, rnn_model, available_bike_stands_scaler, features_scaler, rnn_history)  
 
 
 if __name__ == "__main__":
