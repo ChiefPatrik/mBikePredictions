@@ -2,7 +2,7 @@ name: Train and evaluate models
 
 on:
   workflow_run:
-    workflows: [Fetch, process and merge data every hour]
+    workflows: ["Fetch, process and merge data every hour"]
     types:
       - completed
   workflow_dispatch:
