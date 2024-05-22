@@ -1,21 +1,26 @@
 import re
 import os
 import glob
+import onnx
 import joblib
 import mlflow
 import dagshub
+import tf2onnx
 import numpy as np
 import pandas as pd
+import tensorflow as tf
 import matplotlib.pyplot as plt
 
 from dotenv import load_dotenv
 from mlflow import MlflowClient
+# from skl2onnx import convert_sklearn
+# from skl2onnx.common.data_types import FloatTensorType
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import SimpleRNN, Dense
-
+from mlflow.models import infer_signature
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 merged_data_dir = os.path.join(current_dir, '..', '..', 'data', 'merged')
@@ -131,11 +136,15 @@ def create_time_series_data(time_series, window_size):
 def prepare_data_for_multivariate_time_series(train_data, selected_features):
     # Convert pandas dataframe to numpy array
     train_data = train_data[selected_features].values
+    train_size = len(train_data) - (len(train_data) // 5)
+    train, test = train_data[0:train_size], train_data[train_size:]
 
     # Split dataset in 2 parts - with and without target feature
-    available_bike_stands_train_data = train_data[:,0]
+    available_bike_stands_train_data = train[:,0]
+    other_train_data = train[:,1:]
 
-    other_train_data = train_data[:,1:]
+    available_bike_stands_test_data = test[:,0]
+    other_test_data = test[:,1:]
 
     # Normalize dataset
     available_bike_stands_scaler = MinMaxScaler()
@@ -144,19 +153,28 @@ def prepare_data_for_multivariate_time_series(train_data, selected_features):
     features_scaler = MinMaxScaler()
     scaled_other_train_data = features_scaler.fit_transform(other_train_data)
 
+    scaled_ABS_test_data = available_bike_stands_scaler.transform(available_bike_stands_test_data.reshape(-1, 1))
+    scaled_other_test_data = features_scaler.transform(other_test_data)
+
     # Combine all training data
     train_data = np.column_stack([
         scaled_ABS_train_data,
         scaled_other_train_data
     ])
+    test_data = np.column_stack([
+        scaled_ABS_test_data,
+        scaled_other_test_data
+    ])
 
     # Create time series parts of size 'window_size'
     X_train, y_train = create_time_series_data(train_data, window_size)
+    X_test, y_test = create_time_series_data(test_data, window_size)
 
     # Transpose X_train and X_test
     X_train = np.transpose(X_train, (0, 2, 1))  # Transpose axes 1 and 2
+    X_test = np.transpose(X_test, (0, 2, 1))  # Transpose axes 1 and 2
 
-    return X_train, y_train, available_bike_stands_scaler, features_scaler
+    return X_train, y_train, X_test, y_test, available_bike_stands_scaler, features_scaler
 
 # Function for processing 'datetime', filling missing values and preparing data for multivariate time series
 def process_data(train_data, selected_features):
@@ -170,10 +188,10 @@ def process_data(train_data, selected_features):
         train_data, pipeline = fill_missing_values(train_data)
 
     # Split the dataset into training and testing parts
-    X_train, y_train, available_bike_stands_scaler, features_scaler = prepare_data_for_multivariate_time_series(train_data, selected_features) 	
+    X_train, y_train, X_test, y_test, available_bike_stands_scaler, features_scaler = prepare_data_for_multivariate_time_series(train_data, selected_features) 	
     input_shape = (X_train.shape[1], X_train.shape[2])
 
-    return X_train, y_train, available_bike_stands_scaler, features_scaler, input_shape
+    return X_train, y_train, X_test, y_test, available_bike_stands_scaler, features_scaler, input_shape
 
 
 # ========================
@@ -274,35 +292,42 @@ def main():
     for train_file in train_files:
         station_number = int(re.search('station(\d+)_train.csv', train_file).group(1))
         experiment_name = f"station{station_number}_train_exp"
+        model_name = f"station{station_number}_model"
         mlflow.set_experiment(experiment_name)
 
         with mlflow.start_run(run_name=f"station{station_number}_train_run"):
             mlflow.autolog()
+            run_id = mlflow.active_run().info.run_id    # For versioning mlflow models
 
             train_data = pd.read_csv(train_file)
             print(f"\nTraining model for station {station_number} ...")
 
-            X_train, y_train, available_bike_stands_scaler, features_scaler, input_shape = process_data(train_data, selected_features)
+            X_train, y_train, X_test, y_test, available_bike_stands_scaler, features_scaler, input_shape = process_data(train_data, selected_features)
 
             # Build and train the model
             rnn_model = build_model(input_shape)
             rnn_history = rnn_model.fit(X_train, y_train, epochs=30, validation_split=0.2)
+            predictions = rnn_model.predict(X_test)
 
-            # Log train metrics
+            # Log train metrics to MLflow
             for i in range(len(rnn_history.history['loss'])):
                 mlflow.log_metric("loss", rnn_history.history['loss'][i], step=i)
                 mlflow.log_metric("val_loss", rnn_history.history['val_loss'][i], step=i)
+    
+            # Convert the model to ONNX format
+            input_signature = [
+                tf.TensorSpec(shape=(None, X_train.shape[1], X_train.shape[2]), dtype=tf.double, name="input")
+            ]
+            onnx_model, _ = tf2onnx.convert.from_keras(model=rnn_model, input_signature=input_signature, opset=13)
 
-            # Log the model
-            model_name = f"station{station_number}_model"
-            mlflow.sklearn.log_model(rnn_model, model_name)
+            # Log the model to MLflow
+            registered_model = mlflow.onnx.log_model(onnx_model=onnx_model, 
+                                  artifact_path=f"models/{station_number}/model", 
+                                  signature=infer_signature(X_test, predictions), 
+                                  registered_model_name=model_name)
+            model_version = client.create_model_version(name=model_name, source=registered_model.model_uri, run_id=run_id)    
 
-            # Register the model to the registry
-            run_id = mlflow.active_run().info.run_id
-            model_uri = f"runs:/{run_id}/{model_name}"
-            registered_model = mlflow.register_model(model_uri=model_uri, name=model_name)
-
-            # Get the last production model version
+            # Get the last production model and compare it to current
             try:
                 model_versions = client.get_latest_versions(model_name, stages=["Production"])
                 if model_versions:
@@ -322,7 +347,7 @@ def main():
                         print("Current model is better. Transitioning it to production.")
                         client.transition_model_version_stage(
                             name=model_name,
-                            version=registered_model.version,
+                            version=model_version.version,
                             stage="Production"
                         )
                         mlflow_save_scaler(client, "ABS_scaler", available_bike_stands_scaler, station_number, "Production")
@@ -331,7 +356,7 @@ def main():
                         print("Current model is not better than the production model. Transitioning to staging.")
                         client.transition_model_version_stage(
                             name=model_name,
-                            version=registered_model.version,
+                            version=model_version.version,
                             stage="Staging"
                         )
                         mlflow_save_scaler(client, "ABS_scaler", available_bike_stands_scaler, station_number, "Staging")
@@ -340,17 +365,17 @@ def main():
                     print("No production model found. Transitioning current model to production.")
                     client.transition_model_version_stage(
                         name=model_name,
-                        version=registered_model.version,
+                        version=model_version.version,
                         stage="Production"
                     )
                     mlflow_save_scaler(client, "ABS_scaler", available_bike_stands_scaler, station_number, "Production")
                     mlflow_save_scaler(client, "features_scaler", features_scaler, station_number, "Production")
             except Exception as e:
                 print(f"Error while comparing models: {e}")
-                print("Transitioning current model to production as the first model.")
+                print("Transitioning current model to staging.")
                 client.transition_model_version_stage(
                     name=model_name,
-                    version=registered_model.version,
+                    version=model_version.version,
                     stage="Staging"
                 )
                 mlflow_save_scaler(client, "ABS_scaler", available_bike_stands_scaler, station_number, "Staging")

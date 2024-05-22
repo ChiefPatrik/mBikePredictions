@@ -1,17 +1,26 @@
-from fastapi import FastAPI, HTTPException
-import uvicorn
-from pydantic import BaseModel
-from typing import List
-from fastapi.middleware.cors import CORSMiddleware
-
-#from src.models.predict_model import predict
-import pandas as pd
 import os
-import numpy as np
-import joblib
-import requests
 import ast
-from tensorflow.keras.models import load_model
+import onnx
+import joblib
+import tf2onnx
+import dagshub
+import uvicorn
+import requests
+import numpy as np
+import pandas as pd
+import onnxruntime as onnx_rt
+from typing import List
+from dotenv import load_dotenv
+from pydantic import BaseModel
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+#from tensorflow.keras.models import load_model
+import mlflow
+import mlflow.keras
+import mlflow.sklearn
+from mlflow.tracking import MlflowClient
+#from src.models.predict_model import predict
+
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 models_dir = os.path.join(current_dir, '..', '..', 'models')
@@ -19,19 +28,41 @@ merged_data_dir = os.path.join(current_dir, '..', '..', 'data', 'merged')
 
 window_size = 30
 time_interval = 7
+models_scalers = {}
 
-# Create server
-app = FastAPI()
-# Allow all origins
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Setup MLflow and Dagshub
+load_dotenv()
+mlflow_username = os.getenv("MLFLOW_TRACKING_USERNAME")
+mlflow_password = os.getenv("MLFLOW_TRACKING_PASSWORD")
+mlflow_uri = os.getenv("MLFLOW_TRACKING_URI")
+dagshub.auth.add_app_token(token=mlflow_password)
+dagshub.init(repo_owner=mlflow_username, repo_name='mBikePredictions', mlflow=True)
+mlflow.set_tracking_uri(mlflow_uri)
 
 
+def download_models():
+    client = MlflowClient()
+    print("Presaving models and scalers ...")
+    for i in range(10,15):
+        if i == 11:
+            continue
+        model_name = f"station{i}_model"
+        ABS_scaler_name = f"ABS_scaler={i}"
+        features_scaler_name = f"features_scaler={i}"
+
+        model = mlflow.onnx.load_model(client.get_latest_versions(name=model_name, stages=["Production"])[0].source)
+        ABS_scaler = mlflow.sklearn.load_model( client.get_latest_versions(name=ABS_scaler_name, stages=["Production"])[0].source)
+        features_scaler = mlflow.sklearn.load_model( client.get_latest_versions(name=features_scaler_name, stages=["Production"])[0].source)
+
+        onnx.save_model(model, os.path.join(models_dir, f'station{i}', f"station{i}_model.onnx"))
+        joblib.dump(ABS_scaler, os.path.join(models_dir, f'station{i}', 'ABS_scaler.pkl'))
+        joblib.dump(features_scaler, os.path.join(models_dir, f'station{i}', 'features_scaler.pkl'))
+
+        #models_scalers[i] = {"model": model, "ABS_scaler": ABS_scaler, "features_scaler": features_scaler}
+        print("Downloaded model and scalers for station", i)
+    
+    print("All models downloaded")
+    
 def fetch_fresh_weather_data(coordinates_lat, coordinates_lng):
     url = f"https://api.open-meteo.com/v1/forecast?latitude={coordinates_lat}&longitude={coordinates_lng}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,rain,surface_pressure&forecast_days=2&timezone=auto"
     try:
@@ -83,6 +114,7 @@ def construct_dataset(station_data, weather_data):
 
     return dataset
 
+
 def predict_next_values(dataset, model, ABS_scaler, features_scaler):
     predicted_values = []
 
@@ -103,7 +135,10 @@ def predict_next_values(dataset, model, ABS_scaler, features_scaler):
         print("shape: ", complete_data.shape)
         complete_data_reshaped = complete_data.reshape(1, complete_data.shape[1], complete_data.shape[0])    # Transpose axes 1 and 2
 
-        y_pred = model.predict(complete_data_reshaped)
+        #y_pred = model.predict(complete_data_reshaped)
+        input_name = model.get_inputs()[0].name
+        y_pred = model.run(None, {input_name: complete_data_reshaped.astype(np.double)})[0]
+
         next_value = ABS_scaler.inverse_transform(y_pred)
         print("Next value: ", next_value)
 
@@ -115,12 +150,15 @@ def predict_next_values(dataset, model, ABS_scaler, features_scaler):
     
     return predicted_values
 
+
 def predict(station_number):
-    model_name = f'station{station_number}_model.h5'
-    
-    model = load_model(os.path.join(models_dir, f'station{station_number}', model_name))
+    # model_name = f'station{station_number}_model.h5'
+    # model = load_model(os.path.join(models_dir, f'station{station_number}', model_name))
     ABS_scaler = joblib.load(os.path.join(models_dir, f'station{station_number}', 'ABS_scaler.pkl'))
     features_scaler = joblib.load(os.path.join(models_dir, f'station{station_number}', 'features_scaler.pkl'))
+
+    #model, ABS_scaler, features_scaler = models_scalers[station_number].values()
+    model = onnx_rt.InferenceSession(os.path.join(models_dir, f'station{station_number}', f"station{station_number}_model.onnx"))
 
     # Load existing station data
     station_data = pd.read_csv(os.path.join(merged_data_dir, f'station{station_number}_data.csv'))
@@ -129,7 +167,7 @@ def predict(station_number):
     first_row = station_data.iloc[1]
     location_dict = ast.literal_eval(first_row['coordinates'])
     weather_data = fetch_fresh_weather_data(location_dict['lat'], location_dict['lng'])
-  
+
     dataset = construct_dataset(station_data, weather_data)
     selected_features = [
         'available_bike_stands',
@@ -150,6 +188,17 @@ def predict(station_number):
     return predicted_values
 
 
+# Create server
+app = FastAPI()
+# Allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 class StationData(BaseModel):
     station_number: int
 
@@ -167,4 +216,5 @@ async def predict_mBike(input_data: PredictionInput):
     
 
 if __name__ == "__main__":
+    download_models()
     uvicorn.run(app, host="0.0.0.0", port=3001)
