@@ -2,7 +2,6 @@ import os
 import ast
 import onnx
 import joblib
-import tf2onnx
 import dagshub
 import uvicorn
 import requests
@@ -12,6 +11,7 @@ import onnxruntime as onnx_rt
 from typing import List
 from dotenv import load_dotenv
 from pydantic import BaseModel
+from pymongo import MongoClient
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 #from tensorflow.keras.models import load_model
@@ -28,18 +28,25 @@ merged_data_dir = os.path.join(current_dir, '..', '..', 'data', 'merged')
 
 window_size = 30
 time_interval = 7
-models_scalers = {}
 
-# Setup MLflow and Dagshub
+
+# Setup Dagshub, MLflow and MongoDB
 load_dotenv()
 mlflow_username = os.getenv("MLFLOW_TRACKING_USERNAME")
 mlflow_password = os.getenv("MLFLOW_TRACKING_PASSWORD")
 mlflow_uri = os.getenv("MLFLOW_TRACKING_URI")
+mongo_username = os.getenv("MONGO_USERNAME")
+mongo_password = os.getenv("MONGO_PASSWORD")
+
 dagshub.auth.add_app_token(token=mlflow_password)
 dagshub.init(repo_owner=mlflow_username, repo_name='mBikePredictions', mlflow=True)
 mlflow.set_tracking_uri(mlflow_uri)
 
+db_name = "mBikeInputData"
+connection_string = f"mongodb+srv://{mongo_username}:{mongo_password}@cluster0.v3fli1i.mongodb.net/"
+client = MongoClient(connection_string)
 
+# Function for downloading models and scalers from MLflow
 def download_models():
     client = MlflowClient()
     print("Presaving models and scalers ...")
@@ -58,11 +65,25 @@ def download_models():
         joblib.dump(ABS_scaler, os.path.join(models_dir, f'station{i}', 'ABS_scaler.pkl'))
         joblib.dump(features_scaler, os.path.join(models_dir, f'station{i}', 'features_scaler.pkl'))
 
-        #models_scalers[i] = {"model": model, "ABS_scaler": ABS_scaler, "features_scaler": features_scaler}
         print("Downloaded model and scalers for station", i)
     
-    print("All models downloaded")
+    print("All models downloaded and saved locally!")
+
+# Function for saving input data to MongoDB    
+def save_to_mongodb(first_prediction_datetime, predicted_values): 
+    db = client.get_database(db_name)  
+    collection = db["inputDatasets"]
     
+    # Convert the DataFrame to a list of dictionaries for insertion into MongoDB
+    data_dict = {
+        "datetime": first_prediction_datetime,
+        "predicted_values": predicted_values
+    }
+    
+    collection.insert_one(data_dict)
+    print("Input data saved to MongoDB!")
+
+# Function for fetching fresh weather data from Open-Meteo API
 def fetch_fresh_weather_data(coordinates_lat, coordinates_lng):
     url = f"https://api.open-meteo.com/v1/forecast?latitude={coordinates_lat}&longitude={coordinates_lng}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,rain,surface_pressure&forecast_days=2&timezone=auto"
     try:
@@ -73,7 +94,8 @@ def fetch_fresh_weather_data(coordinates_lat, coordinates_lng):
     except requests.exceptions.RequestException as e:
         print(f"Error fetching weather data: {e}")
         return None
-    
+
+# Function for constructing a new dataset on top of old one with additional fresh weather data    
 def construct_dataset(station_data, weather_data):
     last_rows = station_data.tail(window_size)  # Select the last 'window_size' rows from station_data
 
@@ -107,15 +129,17 @@ def construct_dataset(station_data, weather_data):
     new_rows['datetime'] = new_rows['datetime'].dt.strftime('%Y-%m-%d %H:%M:%S')
     # Leave the 'available_bike_stands' column empty
     new_rows['available_bike_stands'] = np.nan      
+    first_datetime = new_rows['datetime'].values[0]
+    #print("First datetime: ", first_datetime)
 
     # Concatenate last_rows (from stationX_data.csv) and new_rows (from weather_data) to create a new dataset
     dataset = pd.concat([last_rows, new_rows], ignore_index=True)
     #print("DATASET BEFORE", dataset)
 
-    return dataset
+    return dataset, first_datetime
 
 
-def predict_next_values(dataset, model, ABS_scaler, features_scaler):
+def predict_next_time_interval(dataset, model, ABS_scaler, features_scaler):
     predicted_values = []
 
     # Predict 'time_interval' steps ahead
@@ -141,6 +165,8 @@ def predict_next_values(dataset, model, ABS_scaler, features_scaler):
 
         next_value = ABS_scaler.inverse_transform(y_pred)
         print("Next value: ", next_value)
+        if(next_value[0][0] < 0):
+            next_value[0][0] = 0
 
         # Add the predicted value to predicted_values
         predicted_values.append(int(next_value[0][0]))
@@ -150,9 +176,7 @@ def predict_next_values(dataset, model, ABS_scaler, features_scaler):
     
     return predicted_values
 
-
 def predict(station_number):
-    # model_name = f'station{station_number}_model.h5'
     # model = load_model(os.path.join(models_dir, f'station{station_number}', model_name))
     ABS_scaler = joblib.load(os.path.join(models_dir, f'station{station_number}', 'ABS_scaler.pkl'))
     features_scaler = joblib.load(os.path.join(models_dir, f'station{station_number}', 'features_scaler.pkl'))
@@ -168,7 +192,7 @@ def predict(station_number):
     location_dict = ast.literal_eval(first_row['coordinates'])
     weather_data = fetch_fresh_weather_data(location_dict['lat'], location_dict['lng'])
 
-    dataset = construct_dataset(station_data, weather_data)
+    dataset, first_prediction_datetime = construct_dataset(station_data, weather_data)
     selected_features = [
         'available_bike_stands',
         'temperature',
@@ -182,7 +206,9 @@ def predict(station_number):
     ]
     dataset = dataset[selected_features]
 
-    predicted_values = predict_next_values(dataset, model, ABS_scaler, features_scaler)
+    predicted_values = predict_next_time_interval(dataset, model, ABS_scaler, features_scaler)
+    save_to_mongodb(first_prediction_datetime, predicted_values)
+
     #print("Dataset after:\n", dataset)
     print("Predicted values: ", predicted_values)
     return predicted_values
