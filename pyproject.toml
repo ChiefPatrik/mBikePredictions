@@ -27,6 +27,7 @@ joblib = "^1.4.2"
 tf2onnx = "^1.16.1"
 onnxruntime = "^1.18.0"
 pymongo = "^4.7.2"
+tensorflow-model-optimization = "^0.8.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
