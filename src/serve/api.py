@@ -48,7 +48,7 @@ client = MongoClient(connection_string)
 
 # Function for downloading models and scalers from MLflow
 def download_models():
-    client = MlflowClient()
+    mlflowClient = MlflowClient()
     print("Presaving models and scalers ...")
     for i in range(10,15):
         if i == 11:
@@ -57,9 +57,9 @@ def download_models():
         ABS_scaler_name = f"ABS_scaler={i}"
         features_scaler_name = f"features_scaler={i}"
 
-        model = mlflow.onnx.load_model(client.get_latest_versions(name=model_name, stages=["Production"])[0].source)
-        ABS_scaler = mlflow.sklearn.load_model( client.get_latest_versions(name=ABS_scaler_name, stages=["Production"])[0].source)
-        features_scaler = mlflow.sklearn.load_model( client.get_latest_versions(name=features_scaler_name, stages=["Production"])[0].source)
+        model = mlflow.onnx.load_model(mlflowClient.get_latest_versions(name=model_name, stages=["Production"])[0].source)
+        ABS_scaler = mlflow.sklearn.load_model(mlflowClient.get_latest_versions(name=ABS_scaler_name, stages=["Production"])[0].source)
+        features_scaler = mlflow.sklearn.load_model(mlflowClient.get_latest_versions(name=features_scaler_name, stages=["Production"])[0].source)
 
         onnx.save_model(model, os.path.join(models_dir, f'station{i}', f"station{i}_model.onnx"))
         joblib.dump(ABS_scaler, os.path.join(models_dir, f'station{i}', 'ABS_scaler.pkl'))
@@ -70,13 +70,14 @@ def download_models():
     print("All models downloaded and saved locally!")
 
 # Function for saving input data to MongoDB    
-def save_to_mongodb(first_prediction_datetime, predicted_values): 
+def save_to_mongodb(first_prediction_datetime, station_number, predicted_values): 
     db = client.get_database(db_name)  
     collection = db["inputDatasets"]
     
     # Convert the DataFrame to a list of dictionaries for insertion into MongoDB
     data_dict = {
         "datetime": first_prediction_datetime,
+        "station_number": station_number,
         "predicted_values": predicted_values
     }
     
@@ -207,7 +208,7 @@ def predict(station_number):
     dataset = dataset[selected_features]
 
     predicted_values = predict_next_time_interval(dataset, model, ABS_scaler, features_scaler)
-    save_to_mongodb(first_prediction_datetime, predicted_values)
+    save_to_mongodb(first_prediction_datetime, station_number, predicted_values)
 
     #print("Dataset after:\n", dataset)
     print("Predicted values: ", predicted_values)
