@@ -182,7 +182,6 @@ def predict(station_number):
     ABS_scaler = joblib.load(os.path.join(models_dir, f'station{station_number}', 'ABS_scaler.pkl'))
     features_scaler = joblib.load(os.path.join(models_dir, f'station{station_number}', 'features_scaler.pkl'))
 
-    #model, ABS_scaler, features_scaler = models_scalers[station_number].values()
     model = onnx_rt.InferenceSession(os.path.join(models_dir, f'station{station_number}', f"station{station_number}_model.onnx"))
 
     # Load existing station data

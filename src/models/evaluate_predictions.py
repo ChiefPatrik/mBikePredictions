@@ -13,8 +13,6 @@ from tensorflow.keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error, explained_variance_score
 import mlflow
-# import mlflow.keras
-# import mlflow.sklearn
 from mlflow.tracking import MlflowClient
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -44,8 +42,6 @@ def download_models_and_scalers():
     mlflowClient = MlflowClient()
     print("Presaving models and scalers ...")
     for i in range(10,15):
-        if i == 11:
-            continue
         model_name = f"station{i}_model"
         ABS_scaler_name = f"ABS_scaler={i}"
         features_scaler_name = f"features_scaler={i}"
@@ -62,13 +58,14 @@ def download_models_and_scalers():
     
     print("All models downloaded and saved locally!")
 
-# Function for getting documents from MongoDB    
+# Function for getting saved predictions from MongoDB    
 def get_predictions_from_mongo(): 
     db = client.get_database(db_name)  
     collection = db["inputDatasets"]
     documents = collection.find()
     return list(documents)
 
+# Function for evaluating predictions with actual values and logging metrics to MLflow
 def evaluate_predictions(df, index, station_number, available_bike_stands_scaler, prediction):
     y_pred = prediction['predicted_values']
     y_test = df['available_bike_stands'].iloc[index + 1 : index + time_interval + 1].values
@@ -127,6 +124,10 @@ def main():
         df['datetime'] = pd.to_datetime(df['datetime'])
         # Find the index of the row that matches the "datetime" from the prediction
         index = df[df['datetime'] == prediction['datetime']].index[0]
+
+        if index == len(df) - 1:
+            print(f"Did not find the prediction datetime for station {station_number}")
+            continue
 
         # Check if there are "time_interval" rows after the found index
         if index + time_interval < len(df):
