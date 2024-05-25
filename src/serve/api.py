@@ -51,8 +51,6 @@ def download_models():
     mlflowClient = MlflowClient()
     print("Presaving models and scalers ...")
     for i in range(10,15):
-        if i == 11:
-            continue
         model_name = f"station{i}_model"
         ABS_scaler_name = f"ABS_scaler={i}"
         features_scaler_name = f"features_scaler={i}"
