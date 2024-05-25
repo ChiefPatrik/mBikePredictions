@@ -68,7 +68,7 @@ def get_predictions_from_mongo():
 # Function for evaluating predictions with actual values and logging metrics to MLflow
 def evaluate_predictions(df, index, station_number, available_bike_stands_scaler, prediction):
     y_pred = prediction['predicted_values']
-    y_test = df['available_bike_stands'].iloc[index + 1 : index + time_interval + 1].values
+    y_test = df['available_bike_stands'].iloc[index : index + time_interval].values
     for i, value in enumerate(y_pred):
         print("prediction: ", value, " actual: ", y_test[i])
     y_pred = np.array(y_pred).reshape(-1, 1)
