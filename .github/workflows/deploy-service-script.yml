@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY: docker.io
+  REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   
   PROJECT_ID: mbikepredictions
@@ -51,7 +51,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.ACCESS_GITHUB_TOKEN }}
 
       # Extract metadata we can forward into the next step
       - name: Extract metadata (tags, labels) for Docker
