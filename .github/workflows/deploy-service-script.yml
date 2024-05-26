@@ -43,7 +43,7 @@ jobs:
 
       - name: Pull data
         run: |
-          poetry run dvc pull -r origin
+          dvc pull -r origin
           
       # Login to the container registry we want to push Docker image to
       - name: Log in to Container registry
