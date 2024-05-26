@@ -10,7 +10,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-API
+  IMAGE_NAME: ${{ github.repository }}-api
   
   PROJECT_ID: mbikepredictions
   SERVICE_ID: predictionservice
