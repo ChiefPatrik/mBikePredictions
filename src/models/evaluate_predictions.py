@@ -96,23 +96,6 @@ def evaluate_predictions(df, index, station_number, available_bike_stands_scaler
 def main():
     download_models_and_scalers()
     predictions = get_predictions_from_mongo()
-    # predictions = [
-    #     {
-    #         "datetime": "2024-05-02 06:00:00",
-    #         "station_number": 10,
-    #         "predicted_values": [1, 2, 3, 4, 5, 6, 7]
-    #     },
-    #     {
-    #         "datetime": "2024-04-15 11:00:00",
-    #         "station_number": 11,
-    #         "predicted_values": [8, 9, 10, 11, 12, 13, 14]
-    #     },
-    #     {
-    #         "datetime": "2024-05-21 21:00:00",
-    #         "station_number": 12,
-    #         "predicted_values": [15, 16, 17, 18, 19, 20, 21]
-    #     }
-    # ]
 
     for prediction in predictions:
         station_number = prediction['station_number']
@@ -125,9 +108,14 @@ def main():
         # Find the index of the row that matches the "datetime" from the prediction
         index = df[df['datetime'] == prediction['datetime']].index[0]
 
-        if index == len(df) - 1:
-            print(f"Did not find the prediction datetime for station {station_number}")
+        # Find the index of the row that matches the "datetime" from the prediction
+        matching_rows = df[df['datetime'] == prediction['datetime']]
+        
+        if matching_rows.empty:
+            print(f"Did not find the prediction datetime for station {station_number} in the dataset.")
             continue
+        
+        index = matching_rows.index[0]
 
         # Check if there are "time_interval" rows after the found index
         if index + time_interval < len(df):
