@@ -51,7 +51,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: chiefpat
-          password: ${{ secrets.DAGSHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       # Extract metadata we can forward into the next step
       - name: Extract metadata (tags, labels) for Docker
