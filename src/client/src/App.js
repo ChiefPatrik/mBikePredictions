@@ -16,7 +16,8 @@ function App() {
   const fetchStationData = async (stationNumber) => {
     try {
       const response = await axios.get(stationsUrl);
-      setStationsData(response.data);
+      const sortedData = response.data.sort((a, b) => a.number - b.number);   // Sort the response data by the 'number' field
+      setStationsData(sortedData);
       setClickedStation(stationNumber);
     } catch (error) {
       console.error('Error fetching station data:', error);
@@ -27,13 +28,13 @@ function App() {
     await fetchStationData(stationNumber);
     setClickedStation(stationNumber);
     setSelectedStationNumber(stationNumber);
-    // setShowPredictions(false);
+    setShowPredictions(false);
   };
 
   const handlePredictClick = async (stationNumber) => {
     try {
       console.log('stationNumber:', stationNumber);
-      const response = await axios.post('http://localhost:3001/mbajk/predict/', {
+      const response = await axios.post(`${process.env.REACT_APP_PREDICTION_API_URL}/mbajk/predict/`, {
         data: [{ station_number: stationNumber }]
       });
       console.log('response:', response.data.predictions)
