@@ -105,8 +105,6 @@ def main():
         filepath = os.path.join(merged_data_dir, filename)
         df = pd.read_csv(filepath)
         df['datetime'] = pd.to_datetime(df['datetime'])
-        # Find the index of the row that matches the "datetime" from the prediction
-        index = df[df['datetime'] == prediction['datetime']].index[0]
 
         # Find the index of the row that matches the "datetime" from the prediction
         matching_rows = df[df['datetime'] == prediction['datetime']]
